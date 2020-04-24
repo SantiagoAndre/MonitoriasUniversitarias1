@@ -45,6 +45,11 @@ INGRESOS Y EGRESOS:
 '''
 
 # 
+class College(models.Model):
+    name =  models.CharField(max_length=200)
+class CollegeCareer(models.Model):
+    name =  models.CharField(max_length=200)
+    description = models.CharField(max_length=201)
 class Monitor(models.Model):
     name =  models.CharField(max_length=200)
     email =  models.CharField(max_length=200)
@@ -54,11 +59,7 @@ class Monitor(models.Model):
     college =  models.ForeignKey(College, on_delete=models.CASCADE)
     career = models.ForeignKey(CollegeCareer, on_delete=models.CASCADE)
     semester = models.IntegerField()
-class College(models.Model):
-    name =  models.CharField(max_length=200)
-class CollegeCareer(models.Model):
-    name =  models.CharField(max_length=200)
-    description = models.CharField(max_length=201)
+
 class LearningLine(models.Model):
     name =  models.CharField(max_length=200)
     description = models.CharField(max_length=201)
@@ -79,6 +80,20 @@ class Service(models.Model):
     name =  models.CharField(max_length=200)
     description = models.CharField(max_length=201)
 
+class Quotation(models.Model):
+    '''
+        Cotizacion por un servicio de la empresa
+        la cotizacion es una lista de Actividades a realizar, o recursos utilizados 
+        Al final es tendra un precio que puede ser precio por hora, precio total
+        esta cotizacion puede ser aceptada o no por el cliente
+        esta puede ser editada por monitores autorizados
+    '''
+    acepted = models.BooleanField(default=False)
+    service = models.ForeignKey(Service, on_delete=models.CASCADE)
+    date = models.DateTimeField()
+    pass
+
+
 class Poll(models.Model):
     '''
         Datos a evaluar de los servicios de la empresa:
@@ -88,19 +103,6 @@ class Poll(models.Model):
     '''
     quotation = models.OneToOneField(Quotation, on_delete=models.CASCADE)
 
-    pass
-
-class Quotation(models.Model):
-    '''
-        Cotizacion por un servicio de la empresa
-        la cotizacion es una lista de Actividades a realizar, o recursos utilizados 
-        Al final es tendra un precio que puede ser precio por hora, precio total
-        esta cotizacion puede ser aceptada o no por el cliente
-        esta puede ser editada por monitores autorizados
-    '''
-    acepted = name =  models.BooleanField(default=False)
-    service = models.ForeignKey(Service, on_delete=models.CASCADE)
-    date = models.DateTimeField()
     pass
 
 ## HACE FALTA LA PARTE DE INGRESOS Y EGRESOS
