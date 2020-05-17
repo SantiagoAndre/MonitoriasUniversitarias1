@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 from .base import *
 import os
 
-
+from .base import BASE_DIR
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
@@ -55,6 +55,3 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
-
-
