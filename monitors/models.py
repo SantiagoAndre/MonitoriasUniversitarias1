@@ -47,9 +47,19 @@ INGRESOS Y EGRESOS:
 # 
 class College(models.Model):
     name =  models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.name
+
+
 class CollegeCareer(models.Model):
     name =  models.CharField(max_length=200)
     description = models.CharField(max_length=201)
+
+    def __str__(self):
+        return self.name
+
+
 class Monitor(models.Model):
     name =  models.CharField(max_length=200)
     email =  models.CharField(max_length=200)
@@ -60,25 +70,44 @@ class Monitor(models.Model):
     career = models.ForeignKey(CollegeCareer, on_delete=models.CASCADE)
     semester = models.IntegerField()
 
+    def __str__(self):
+        return self.name
+
+
 class LearningLine(models.Model):
     name =  models.CharField(max_length=200)
     description = models.CharField(max_length=201)
     career = models.ForeignKey(CollegeCareer, on_delete=models.CASCADE)
-    
+
+    def __str__(self):
+        return self.name
+
+
 class Topic(models.Model):
     name =  models.CharField(max_length=200)
     description = models.CharField(max_length=201)
     learning_line = models.ForeignKey(LearningLine, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name
+
 
 class Subtopic(models.Model):
     name =  models.CharField(max_length=200)
     description = models.CharField(max_length=201)
     topic = models.ForeignKey(Topic, on_delete=models.CASCADE)
 
+    def __str__(self):
+        return self.name
+
 
 class Service(models.Model):
     name =  models.CharField(max_length=200)
     description = models.CharField(max_length=201)
+
+    def __str__(self):
+        return self.name
+
 
 class Quotation(models.Model):
     '''
@@ -91,7 +120,9 @@ class Quotation(models.Model):
     acepted = models.BooleanField(default=False)
     service = models.ForeignKey(Service, on_delete=models.CASCADE)
     date = models.DateTimeField()
-    pass
+    
+    def __str__(self):
+        return self.date.strftime('%d-%m-%Y, %H:%M:%S')
 
 
 class Poll(models.Model):
@@ -103,6 +134,5 @@ class Poll(models.Model):
     '''
     quotation = models.OneToOneField(Quotation, on_delete=models.CASCADE)
 
-    pass
 
 ## HACE FALTA LA PARTE DE INGRESOS Y EGRESOS
