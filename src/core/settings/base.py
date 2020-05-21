@@ -43,7 +43,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'MonitoriasUniversitarias.urls'
+ROOT_URLCONF = 'core.urls'
 
 TEMPLATES = [
     {
@@ -61,7 +61,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'MonitoriasUniversitarias.wsgi.application'
+WSGI_APPLICATION = 'core.wsgi.application'
 
 
 
@@ -88,5 +88,5 @@ STATIC_URL = '/static/'
 # Grahene definition
 # https://docs.graphene-python.org/
 GRAPHENE = {
-    'SCHEMA': 'MonitoriasUniversitarias.schema.schema'
+    'SCHEMA': 'core.schema.schema'
 }
