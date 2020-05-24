@@ -10,7 +10,7 @@ from monitors.models import Subtopic
 from monitors.models import Service
 from monitors.models import Quotation
 from monitors.models import Poll
-from .connections import TotalCountConnection
+from api_graphql.connections import TotalCountConnection
 
 # Create your objects types here.
 
@@ -94,17 +94,3 @@ class PollNode(DjangoObjectType):
         # filter_fields = []
         interfaces = (Node, )
         connection_class = TotalCountConnection
-
-
-# class IngredientNode(DjangoObjectType):
-
-#     class Meta:
-#         model = Ingredient
-#         filter_fields = {
-#             'name': ['exact', 'icontains', 'istartswith'],
-#             'notes': ['exact', 'icontains'],
-#             'category': ['exact'],
-#             'category__name': ['exact'],
-#         }
-#         interfaces = (Node, )
-#         connection_class = TotalCountConnection
