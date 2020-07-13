@@ -5,19 +5,23 @@ from graphql import GraphQLError
 from graphql_relay.node.node import from_global_id
 
 from monitors.models import College
-from monitors.models import CollegeCareer
+from monitors.models import Career
+from monitors.models import City
+from monitors.models import Contact
 from monitors.models import Monitor
-from monitors.models import LearningLine
-from monitors.models import Topic
-from monitors.models import Subtopic
 from monitors.models import Service
+from monitors.models import Skill
+from monitors.models import Client
+from monitors.models import Quoation
 from api_graphql.monitors.objects import CollegeNode
-from api_graphql.monitors.objects import CollegeCareerNode
+from api_graphql.monitors.objects import CareerNode
+from api_graphql.monitors.objects import CityNode
+from api_graphql.monitors.objects import ContactNode
 from api_graphql.monitors.objects import MonitorNode
-from api_graphql.monitors.objects import LearningLineNode
-from api_graphql.monitors.objects import TopicNode
-from api_graphql.monitors.objects import SubtopicNode
 from api_graphql.monitors.objects import ServiceNode
+from api_graphql.monitors.objects import SkillNode
+from api_graphql.monitors.objects import ClientNode
+from api_graphql.monitors.objects import QuoationNode
 
 # Create your mutations here
 
@@ -39,8 +43,8 @@ class DeleteCollege(Mutation):
         return DeleteCollege(college=college)
 
 
-class DeleteCollegeCareer(Mutation):
-    college_career = Field(CollegeCareerNode)
+class DeleteCareer(Mutation):
+    career = Field(CareerNode)
 
     class Arguments:
         input = ID(required=True)
@@ -48,12 +52,46 @@ class DeleteCollegeCareer(Mutation):
     def mutate(self, info, input):
         input = from_global_id(input)[1]
         try:
-            college_career = CollegeCareer.objects.get(pk=input)
-            CollegeCareer.objects.filter(pk=input).delete()
-        except CollegeCareer.DoesNotExist:
+            career = Career.objects.get(pk=input)
+            Career.objects.filter(pk=input).delete()
+        except Career.DoesNotExist:
             raise GraphQLError('College career does not delete')
 
-        return DeleteCollegeCareer(college_career=college_career)
+        return DeleteCareer(career=career)
+
+
+class DeleteCity(Mutation):
+    city = Field(CityNode)
+
+    class Arguments:
+        input = ID(required=True)
+
+    def mutate(self, info, input):
+        input = from_global_id(input)[1]
+        try:
+            city = City.objects.get(pk=input)
+            City.objects.filter(pk=input).delete()
+        except City.DoesNotExist:
+            raise GraphQLError('City does not delete')
+
+        return DeleteCity(city=city)
+
+
+class DeleteContact(Mutation):
+    contact = Field(ContactNode)
+
+    class Arguments:
+        input = ID(required=True)
+
+    def mutate(self, info, input):
+        input = from_global_id(input)[1]
+        try:
+            contact = Contact.objects.get(pk=input)
+            Contact.objects.filter(pk=input).delete()
+        except Contact.DoesNotExist:
+            raise GraphQLError('Contact does not delete')
+
+        return DeleteContact(contact=contact)
 
 
 class DeleteMonitor(Mutation):
@@ -73,57 +111,6 @@ class DeleteMonitor(Mutation):
         return DeleteMonitor(monitor=monitor)
 
 
-class DeleteLearningLine(Mutation):
-    learning_line = Field(LearningLineNode)
-
-    class Arguments:
-        input = ID(required=True)
-
-    def mutate(self, info, input):
-        input = from_global_id(input)[1]
-        try:
-            learning_line = LearningLine.objects.get(pk=input)
-            LearningLine.objects.filter(pk=input).delete()
-        except LearningLine.DoesNotExist:
-            raise GraphQLError('Learning line does not delete')
-
-        return DeleteLearningLine(learning_line=learning_line)
-
-
-class DeleteTopic(Mutation):
-    topic = Field(TopicNode)
-
-    class Arguments:
-        input = ID(required=True)
-
-    def mutate(self, info, input):
-        input = from_global_id(input)[1]
-        try:
-            topic = Topic.objects.get(pk=input)
-            Topic.objects.filter(pk=input).delete()
-        except Topic.DoesNotExist:
-            raise GraphQLError('Topic does not delete')
-
-        return DeleteTopic(topic=topic)
-
-
-class DeleteSubtopic(Mutation):
-    subtopic = Field(SubtopicNode)
-
-    class Arguments:
-        input = ID(required=True)
-
-    def mutate(self, info, input):
-        input = from_global_id(input)[1]
-        try:
-            subtopic = Subtopic.objects.get(pk=input)
-            Subtopic.objects.filter(pk=input).delete()
-        except Subtopic.DoesNotExist:
-            raise GraphQLError('Subtopic does not delete')
-
-        return DeleteSubtopic(subtopic=subtopic)
-
-
 class DeleteService(Mutation):
     service = Field(ServiceNode)
 
@@ -139,3 +126,54 @@ class DeleteService(Mutation):
             raise GraphQLError('Service does not delete')
 
         return DeleteService(service=service)
+
+
+class DeleteSkill(Mutation):
+    skill = Field(SkillNode)
+
+    class Arguments:
+        input = ID(required=True)
+
+    def mutate(self, info, input):
+        input = from_global_id(input)[1]
+        try:
+            skill = Skill.objects.get(pk=input)
+            Skill.objects.filter(pk=input).delete()
+        except Skill.DoesNotExist:
+            raise GraphQLError('Skill does not delete')
+
+        return DeleteSkill(skill=skill)
+
+
+class DeleteClient(Mutation):
+    client = Field(ClientNode)
+
+    class Arguments:
+        input = ID(required=True)
+
+    def mutate(self, info, input):
+        input = from_global_id(input)[1]
+        try:
+            client = Client.objects.get(pk=input)
+            Client.objects.filter(pk=input).delete()
+        except Client.DoesNotExist:
+            raise GraphQLError('Client does not delete')
+
+        return DeleteClient(client=client)
+
+
+class DeleteQuoation(Mutation):
+    quoation = Field(QuoationNode)
+
+    class Arguments:
+        input = ID(required=True)
+
+    def mutate(self, info, input):
+        input = from_global_id(input)[1]
+        try:
+            quoation = Quoation.objects.get(pk=input)
+            Quoation.objects.filter(pk=input).delete()
+        except Quoation.DoesNotExist:
+            raise GraphQLError('Quoation does not delete')
+
+        return DeleteQuoation(quoation=quoation)

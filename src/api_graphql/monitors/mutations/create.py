@@ -1,28 +1,33 @@
 from graphene import Field
-from graphene import String
 from graphene import Mutation
 
 from monitors.models import College
-from monitors.models import CollegeCareer
+from monitors.models import Career
+from monitors.models import City
+from monitors.models import Contact
 from monitors.models import Monitor
-from monitors.models import LearningLine
-from monitors.models import Topic
-from monitors.models import Subtopic
 from monitors.models import Service
+from monitors.models import Skill
+from monitors.models import Client
+from monitors.models import Quoation
 from api_graphql.monitors.objects import CollegeNode
-from api_graphql.monitors.objects import CollegeCareerNode
+from api_graphql.monitors.objects import CareerNode
+from api_graphql.monitors.objects import CityNode
+from api_graphql.monitors.objects import ContactNode
 from api_graphql.monitors.objects import MonitorNode
-from api_graphql.monitors.objects import LearningLineNode
-from api_graphql.monitors.objects import TopicNode
-from api_graphql.monitors.objects import SubtopicNode
 from api_graphql.monitors.objects import ServiceNode
+from api_graphql.monitors.objects import SkillNode
+from api_graphql.monitors.objects import ClientNode
+from api_graphql.monitors.objects import QuoationNode
 from api_graphql.monitors.inputs import CreateCollegeInput
-from api_graphql.monitors.inputs import CreateCollegeCareerInput
+from api_graphql.monitors.inputs import CreateCareerInput
+from api_graphql.monitors.inputs import CreateCityInput
+from api_graphql.monitors.inputs import CreateContactInput
 from api_graphql.monitors.inputs import CreateMonitorInput
-from api_graphql.monitors.inputs import CreateLearningLineInput
-from api_graphql.monitors.inputs import CreateTopicInput
-from api_graphql.monitors.inputs import CreateSubtopicInput
 from api_graphql.monitors.inputs import CreateServiceInput
+from api_graphql.monitors.inputs import CreateSkillInput
+from api_graphql.monitors.inputs import CreateClientInput
+from api_graphql.monitors.inputs import CreateQuoationInput
 from api_graphql.utils import transform_global_ids
 from api_graphql.utils import delete_attributes_none
 
@@ -41,16 +46,42 @@ class CreateCollege(Mutation):
         return CreateCollege(college=college)
 
 
-class CreateCollegeCareer(Mutation):
-    college_career = Field(CollegeCareerNode)
+class CreateCareer(Mutation):
+    career = Field(CareerNode)
 
     class Arguments:
-        input = CreateCollegeCareerInput(required=True)
+        input = CreateCareerInput(required=True)
 
     def mutate(self, info, input):
-        college_career = CollegeCareer.objects.create(**vars(input))
-        
-        return CreateCollegeCareer(college_career=college_career)
+        career = Career.objects.create(**vars(input))
+
+        return CreateCareer(career=career)
+
+
+class CreateCity(Mutation):
+    city = Field(CityNode)
+
+    class Arguments:
+        input = CreateCityInput(required=True)
+
+    def mutate(self, info, input):
+        city = City.objects.create(**vars(input))
+
+        return CreateCity(city=city)
+
+
+class CreateContact(Mutation):
+    contact = Field(ContactNode)
+
+    class Arguments:
+        input = CreateContactInput(required=True)
+
+    def mutate(self, info, input):
+        input = delete_attributes_none(**vars(input))
+        input = transform_global_ids(**input)
+        contact = Contact.objects.create(**vars(input))
+
+        return CreateContact(contact=contact)
 
 
 class CreateMonitor(Mutation):
@@ -67,50 +98,8 @@ class CreateMonitor(Mutation):
         return CreateMonitor(monitor=monitor)
 
 
-class CreateLearningLine(Mutation):
-    learning_line = Field(LearningLineNode)
-
-    class Arguments:
-        input = CreateLearningLineInput(required=True)
-
-    def mutate(self, info, input):
-        input = delete_attributes_none(**vars(input))
-        input = transform_global_ids(**input)
-        learning_line = LearningLine.objects.create(**input)
-
-        return CreateLearningLine(learning_line=learning_line)
-
-
-class CreateTopic(Mutation):
-    topic = Field(TopicNode)
-
-    class Arguments:
-        input = CreateTopicInput(required=True)
-
-    def mutate(self, info, input):
-        input = delete_attributes_none(**vars(input))
-        input = transform_global_ids(**input)
-        topic = LearningLine.objects.create(**input)
-
-        return CreateTopic(topic=topic)
-
-
-class CreateSubtopic(Mutation):
-    subtopic = Field(SubtopicNode)
-
-    class Arguments:
-        input = CreateSubtopicInput(required=True)
-
-    def mutate(self, info, input):
-        input = delete_attributes_none(**vars(input))
-        input = transform_global_ids(**input)
-        subtopic = LearningLine.objects.create(**input)
-
-        return CreateSubtopic(subtopic=subtopic)
-
-
 class CreateService(Mutation):
-    service = Field(SubtopicNode)
+    service = Field(ServiceNode)
 
     class Arguments:
         input = CreateServiceInput(required=True)
@@ -118,6 +107,46 @@ class CreateService(Mutation):
     def mutate(self, info, input):
         input = delete_attributes_none(**vars(input))
         input = transform_global_ids(**input)
-        service = LearningLine.objects.create(**input)
+        service = Service.objects.create(**input)
 
         return CreateService(service=service)
+
+
+class CreateSkill(Mutation):
+    skill = Field(SkillNode)
+
+    class Arguments:
+        input = CreateSkillInput(required=True)
+
+    def mutate(self, info, input):
+        input = delete_attributes_none(**vars(input))
+        input = transform_global_ids(**input)
+        skill = Skill.objects.create(**input)
+
+        return CreateSkill(skill=skill)
+
+
+class CreateClient(Mutation):
+    skill = Field(ClientNode)
+
+    class Arguments:
+        input = CreateClientInput(required=True)
+
+    def mutate(self, info, input):
+        client = Client.objects.create(**input)
+
+        return CreateClient(client=client)
+
+
+class CreateQuoation(Mutation):
+    quoation = Field(QuoationNode)
+
+    class Arguments:
+        input = CreateQuoationInput(required=True)
+
+    def mutate(self, info, input):
+        input = delete_attributes_none(**vars(input))
+        input = transform_global_ids(**input)
+        quoation = Quoation.objects.create(**input)
+
+        return CreateQuoation(quoation=quoation)

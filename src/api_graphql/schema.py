@@ -2,94 +2,99 @@ from graphene import ObjectType
 from graphene.relay import Node
 from graphene_django.filter import DjangoFilterConnectionField
 
-from monitors.models import College
-from monitors.models import CollegeCareer
-from monitors.models import Monitor
-from monitors.models import LearningLine
-from monitors.models import Topic
-from monitors.models import Subtopic
-from monitors.models import Service
-from monitors.models import Quotation
-from monitors.models import Poll
 from .monitors.objects import CollegeNode
-from .monitors.objects import CollegeCareerNode
+from .monitors.objects import CareerNode
+from .monitors.objects import CityNode
+from .monitors.objects import ContactNode
 from .monitors.objects import MonitorNode
-from .monitors.objects import LearningLineNode
-from .monitors.objects import TopicNode
-from .monitors.objects import SubtopicNode
 from .monitors.objects import ServiceNode
-from .monitors.objects import QuotationNode
-from .monitors.objects import PollNode
+from .monitors.objects import SkillNode
+from .monitors.objects import ClientNode
+from .monitors.objects import QuoationNode
+
+
 from .monitors.mutations.create import CreateCollege
-from .monitors.mutations.create import CreateCollegeCareer
+from .monitors.mutations.create import CreateCareer
+from .monitors.mutations.create import CreateCity
+from .monitors.mutations.create import CreateContact
 from .monitors.mutations.create import CreateMonitor
-from .monitors.mutations.create import CreateLearningLine
-from .monitors.mutations.create import CreateTopic
-from .monitors.mutations.create import CreateSubtopic
 from .monitors.mutations.create import CreateService
+from .monitors.mutations.create import CreateSkill
+from .monitors.mutations.create import CreateClient
+from .monitors.mutations.create import CreateQuoation
 
 from .monitors.mutations.update import UpdateCollege
-from .monitors.mutations.update import UpdateCollegeCareer
+from .monitors.mutations.update import UpdateCareer
+from .monitors.mutations.update import UpdateCity
+from .monitors.mutations.update import UpdateContact
 from .monitors.mutations.update import UpdateMonitor
-from .monitors.mutations.update import UpdateLearningLine
-from .monitors.mutations.update import UpdateTopic
-from .monitors.mutations.update import UpdateSubtopic
 from .monitors.mutations.update import UpdateService
+from .monitors.mutations.update import UpdateSkill
+from .monitors.mutations.update import UpdateClient
+from .monitors.mutations.update import UpdateQuoation
 
 from .monitors.mutations.delete import DeleteCollege
-from .monitors.mutations.delete import DeleteCollegeCareer
+from .monitors.mutations.delete import DeleteCareer
+from .monitors.mutations.delete import DeleteCity
+from .monitors.mutations.delete import DeleteContact
 from .monitors.mutations.delete import DeleteMonitor
-from .monitors.mutations.delete import DeleteLearningLine
-from .monitors.mutations.delete import DeleteTopic
-from .monitors.mutations.delete import DeleteSubtopic
 from .monitors.mutations.delete import DeleteService
+from .monitors.mutations.delete import DeleteSkill
+from .monitors.mutations.delete import DeleteClient
+from .monitors.mutations.delete import DeleteQuoation
 
 # Schema definition
 
 
 class Query(ObjectType):
     college = Node.Field(CollegeNode)
-    college_career = Node.Field(CollegeCareerNode)
+    career = Node.Field(CareerNode)
+    city = Node.Field(CityNode)
+    contact = Node.Field(ContactNode)
     monitor = Node.Field(MonitorNode)
-    learning_line = Node.Field(LearningLineNode)
-    topic = Node.Field(TopicNode)
-    subtopic = Node.Field(SubtopicNode)
     service = Node.Field(ServiceNode)
-    # quotation = Node.Field(QuotationNode)
-    # poll = Node.Field(PollNode)
+    skill = Node.Field(SkillNode)
+    client = Node.Field(ClientNode)
+    quoation = Node.Field(QuoationNode)
 
     all_colleges = DjangoFilterConnectionField(CollegeNode)
-    all_college_careers = DjangoFilterConnectionField(CollegeCareerNode)
+    all_careers = DjangoFilterConnectionField(CareerNode)
+    all_cities = DjangoFilterConnectionField(CityNode)
+    all_contacts = DjangoFilterConnectionField(ContactNode)
     all_monitors = DjangoFilterConnectionField(MonitorNode)
-    all_learning_lines = DjangoFilterConnectionField(LearningLineNode)
-    all_topics = DjangoFilterConnectionField(TopicNode)
-    all_subtopics = DjangoFilterConnectionField(SubtopicNode)
     all_services = DjangoFilterConnectionField(ServiceNode)
-    # all_quotations = DjangoFilterConnectionField(QuotationNode)
-    # all_polls = DjangoFilterConnectionField(PollNode)
+    all_skills = DjangoFilterConnectionField(SkillNode)
+    all_clients = DjangoFilterConnectionField(ClientNode)
+    all_quoations = DjangoFilterConnectionField(QuoationNode)
 
 
 class Mutation(ObjectType):
     create_college = CreateCollege.Field()
-    create_college_career = CreateCollegeCareer.Field()
+    create_career = CreateCareer.Field()
+    create_city = CreateCity.Field()
+    create_contact = CreateContact.Field()
     create_monitor = CreateMonitor.Field()
-    create_learning_line = CreateLearningLine.Field()
-    create_topic = CreateTopic.Field()
-    create_subtopic = CreateSubtopic.Field()
     create_service = CreateService.Field()
+    create_skill = CreateSkill.Field()
+    create_client = CreateClient.Field()
+    create_quoation = CreateQuoation.Field()
 
     update_college = UpdateCollege.Field()
-    update_college_career = UpdateCollegeCareer.Field()
+    update_career = UpdateCareer.Field()
+    update_city = UpdateCity.Field()
+    update_contact = UpdateContact.Field()
     update_monitor = UpdateMonitor.Field()
-    update_learning_line = UpdateLearningLine.Field()
-    update_topic = UpdateTopic.Field()
-    update_subtopic = UpdateSubtopic.Field()
     update_service = UpdateService.Field()
+    update_skill = UpdateSkill.Field()
+    update_client = UpdateClient.Field()
+    update_quoation = UpdateQuoation.Field()
 
     delete_college = DeleteCollege.Field()
-    delete_college_career = DeleteCollegeCareer.Field()
+    delete_career = DeleteCareer.Field()
+    delete_city = DeleteCity.Field()
+    delete_contact = DeleteContact.Field()
     delete_monitor = DeleteMonitor.Field()
-    delete_learning_line = DeleteLearningLine.Field()
-    delete_topic = DeleteTopic.Field()
-    delete_subtopic = DeleteSubtopic.Field()
     delete_service = DeleteService.Field()
+    delete_skill = DeleteSkill.Field()
+    delete_client = DeleteClient.Field()
+    delete_quoation = DeleteQuoation.Field()
