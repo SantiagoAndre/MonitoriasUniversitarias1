@@ -17,7 +17,7 @@ class Career(models.Model):
     """Carrerra"""
 
     name = models.CharField(max_length=200)
-    description = models.TextField()
+    description = models.TextField(null=True)
 
     college = models.ForeignKey(
         'College', related_name='careers', on_delete=CASCADE)
@@ -68,6 +68,7 @@ class Service(models.Model):
     """Servicio"""
 
     name = models.CharField(max_length=200)
+    description = models.TextField(null=True)
 
     monitor = models.ForeignKey(
         'Monitor', related_name='services', on_delete=CASCADE)
@@ -108,4 +109,5 @@ class Quoation(models.Model):
     delivery = models.DateTimeField()
     price = models.IntegerField()
 
+    monitor = models.ForeignKey('Monitor', related_name='quoations', on_delete=CASCADE)
     client = models.ForeignKey('Client', related_name='quoations', on_delete=CASCADE)
