@@ -1,3 +1,8 @@
+import dj_database_url
+from decouple import config
+import os
+
+
 """
 Django settings for monitoriasuniversitarias project.
 
@@ -46,6 +51,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',#static files
 ]
 
 ROOT_URLCONF = 'core.urls'
@@ -105,8 +111,36 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
-STATIC_URL = '/static/'
+
 
 GRAPHENE = {
     'SCHEMA': 'apps.api_graphql.schema.ROOT_SCHEMA',
 }
+
+
+#  Production
+
+
+
+# SECURITY WARNING: keep the secret key used in production secret!
+SECRET_KEY = config('SECRET_KEY',default = "secret")
+
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = config('DEBUG', default=True, cast=bool)
+
+ALLOWED_HOSTS = ["*"]
+
+# Database
+# https://docs.djangoproject.com/en/3.0/ref/settings/#databases
+DATABASES = {
+    'default':  dj_database_url.config(
+        default=config("DATABASE_URL",default="sqlite: db.sqlite3")
+    )
+}
+
+STATIC_URL = '/static/'
+STATICFILES_STORAGE =(
+    os.path.join(BASE_DIR,'static')
+)
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
