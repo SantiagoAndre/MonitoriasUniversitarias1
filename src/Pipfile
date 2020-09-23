@@ -17,6 +17,7 @@ python-decouple ="*"
 dj-database-url = "*"
 psycopg2-binary = "*"
 psycopg2 = "*"
+django-cors-headers = "*"
 [dev-packages]
 pylint = "*"
 pylint-django = "*"

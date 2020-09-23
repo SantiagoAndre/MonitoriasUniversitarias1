@@ -2,6 +2,8 @@ from graphene import ID
 from graphene import Field
 from graphene import Mutation
 
+from graphql_relay.node.node import from_global_id
+
 from apps.learning_graph.models import LearningLine
 
 

@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'graphene_django',
+    'corsheaders',# cors
     'apps.learning_graph',
     'apps.api_graphql'
 ]
@@ -52,6 +53,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',#static files
+     'corsheaders.middleware.CorsMiddleware',#cors
+    'django.middleware.common.CommonMiddleware',#cors
 ]
 
 ROOT_URLCONF = 'core.urls'
@@ -117,7 +120,7 @@ GRAPHENE = {
     'SCHEMA': 'apps.api_graphql.schema.ROOT_SCHEMA',
 }
 
-
+CORS_ORIGIN_ALLOW_ALL = True # ALLOW ALL ORIGINS CORS
 #  Production
 
 
