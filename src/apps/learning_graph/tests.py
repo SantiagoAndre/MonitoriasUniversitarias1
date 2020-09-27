@@ -11,7 +11,6 @@ class LearningGraphTest(TestCase):
         obj_test_three = Subject.objects.create(name="Tema 1", description="Descripción para tema 1", parent=None)
         obj_test_four = Subject.objects.create(name="Subtema 1 de Tema 1", description="Descripción para Subtema 1 de Tema 1", parent=obj_test_three)
         obj_test_five = Subject(name="Tema 2", description="Descripción para Tema 2", parent=None)
-        obj_test_five.save()
         obj_test_five.parent = obj_test_five
         obj_test_five.save()
     
@@ -27,4 +26,6 @@ class LearningGraphTest(TestCase):
                 bad_records.append(subject)
         self.assertEquals(len(bad_records), 0)
 
+
+# * comando python manage.py test apps.learning_graph.tests
 
