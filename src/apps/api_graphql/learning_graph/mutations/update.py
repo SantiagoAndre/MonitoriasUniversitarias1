@@ -29,16 +29,15 @@ class UpdateLearningLine(Mutation):
 
 
 class UpdateSubject(Mutation):
-    learning_line = Field(SubjectNode)
+    subject = Field(SubjectNode)
 
     class Arguments:
         input = UpdateSubjectInput(required=True)
 
     def mutate(self, info, input):
-        id = from_global_id(input.get('id'))
-        print("id", input.get('id'))
-        print("id decode", id)
-        Subject.objects.filter(pk=id).update(**input)
-        learning_line = Subject.objects.get(pk=input.get('id'))
+        input["id"]= int( from_global_id(input.get('id'))[1] )
+        print(input)
+        Subject.objects.filter(pk=input.get('id')).update(**input)
+        subject = Subject.objects.get(pk=input.get('id'))
         
-        return UpdateSubject(learning_line=learning_line)
+        return UpdateSubject(subject=subject)

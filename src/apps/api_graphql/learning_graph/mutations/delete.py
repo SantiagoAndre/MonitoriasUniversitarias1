@@ -30,7 +30,7 @@ class DeleteLearningLine(Mutation):
 
 
 class DeleteSubject(Mutation):
-    learning_line = Field(SubjectNode)
+    subject = Field(SubjectNode)
 
     class Arguments:
         input = ID(required=True)
@@ -38,10 +38,10 @@ class DeleteSubject(Mutation):
     def mutate(self, info, input):
         input = from_global_id(input)[1]
         try:
-            learning_line = Subject.objects.get(pk=input)
+            subject = Subject.objects.get(pk=input)
             Subject.objects.filter(pk=input).delete()
         except Subject.DoesNotExist:
-            raise GraphQLError('Learning Line does not delete')
+            raise GraphQLError('Subject does not delete')
 
-        return DeleteSubject(learning_line=learning_line)
+        return DeleteSubject(subject=subject)
         
