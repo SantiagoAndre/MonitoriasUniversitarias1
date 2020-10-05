@@ -7,9 +7,10 @@ from apps.learning_graph.models import LearningLine, Subject
 
 from .learning_graph.objects import LearningLineNode,SubjectNode
 
-from .learning_graph.mutations.create import CreateLearningLine
-from .learning_graph.mutations.update import UpdateLearningLine
-from .learning_graph.mutations.delete import DeleteLearningLine
+from .learning_graph.mutations.create import CreateLearningLine,CreateSubject
+from .learning_graph.mutations.update import UpdateLearningLine,UpdateSubject
+from .learning_graph.mutations.delete import DeleteLearningLine,DeleteSubject
+
 
 # Schema definition
 
@@ -26,6 +27,9 @@ class Mutation(ObjectType):
     update_learning_line = UpdateLearningLine.Field()
     delete_learning_line = DeleteLearningLine.Field()
     
+    create_subject = CreateSubject.Field()
+    update_subject = UpdateSubject.Field()
+    delete_subject = DeleteSubject.Field()
 
 
 ROOT_SCHEMA = Schema(query=Query, mutation=Mutation)
