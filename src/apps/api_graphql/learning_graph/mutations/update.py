@@ -20,7 +20,7 @@ class UpdateLearningLine(Mutation):
     def mutate(self, info, input):
         input["id"]= from_global_id(input.get('id'))[1]
         
-        print("id decode", input.get('id'))
+        
         LearningLine.objects.filter(pk=input.get('id')).update(**input)
         learning_line = LearningLine.objects.get(pk=input.get('id'))
         

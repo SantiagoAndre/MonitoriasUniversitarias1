@@ -9,7 +9,7 @@ from apps.api_graphql.learning_graph.inputs import CreateLearningLineInput,Creat
 
 from apps.api_graphql.utils import transform_global_ids
 from apps.api_graphql.utils import delete_attributes_none
-
+from graphql_relay.node.node import from_global_id
 class CreateLearningLine(Mutation):
     learning_line = Field(LearningLineNode)
 
@@ -23,12 +23,18 @@ class CreateLearningLine(Mutation):
 
 
 class CreateSubject(Mutation):
-    learning_line = Field(SubjectNode)
+
+    subject = Field(SubjectNode)
 
     class Arguments:
         input = CreateSubjectInput(required=True)
 
     def mutate(self, info, input):
-        learning_line = Subject.objects.create(**vars(input))
-
-        return CreateSubject(learning_line=learning_line)
+        new_input = {}
+        print(dir(input))
+        input.__dict__["learning_line_id"] = int( from_global_id(input.get('learning_line_id'))[1] )
+        if input.get("parent_id"):
+            input.__dict__["parent_id"]= int( from_global_id(input.get('parent_id'))[1] )
+        subject = Subject.objects.create(**vars(input))
+        
+        return CreateSubject(subject=subject)

@@ -17,7 +17,8 @@ class Subject(models.Model):
         unique_together = ["name"]
     name = models.CharField(_("name"),max_length=100,blank=False,null=False)
     description = models.CharField(_("description"),max_length=200,blank=False,null=False)   
-    parent = models.ForeignKey('self',verbose_name=_("parent subject"),on_delete=models.CASCADE,null=False)
+    parent = models.ForeignKey('self',verbose_name=_("parent subject"),on_delete=models.CASCADE,null=True)
+    learning_line = models.ForeignKey(LearningLine,verbose_name=_("learning line"),on_delete=models.CASCADE,null=False)
     def __str__(self):
         return self.name
     
