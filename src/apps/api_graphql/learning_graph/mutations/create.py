@@ -18,10 +18,12 @@ class CreateLearningLine(Mutation):
 
     def mutate(self, info, input):
         learning_line = LearningLine.objects.create(**vars(input))
+
         return CreateLearningLine(learning_line=learning_line)
 
 
 class CreateSubject(Mutation):
+
     subject = Field(SubjectNode)
 
     class Arguments:
@@ -36,4 +38,3 @@ class CreateSubject(Mutation):
         subject = Subject.objects.create(**vars(input))
         
         return CreateSubject(subject=subject)
-

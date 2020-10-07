@@ -1,6 +1,7 @@
 from graphene import ID
 from graphene import Field
 from graphene import Mutation
+from graphql import GraphQLError
 
 from graphql_relay.node.node import from_global_id
 
@@ -24,13 +25,13 @@ class DeleteLearningLine(Mutation):
             learning_line = LearningLine.objects.get(pk=input)
             LearningLine.objects.filter(pk=input).delete()
         except LearningLine.DoesNotExist:
-            raise GraphQLError('Learning Line does not delete')
+            raise GraphQLError('LearningLine: Learning Line not found')
 
         return DeleteLearningLine(learning_line=learning_line)
 
 
 class DeleteSubject(Mutation):
-    learning_line = Field(SubjectNode)
+    subject = Field(SubjectNode)
 
     class Arguments:
         input = ID(required=True)
@@ -38,10 +39,10 @@ class DeleteSubject(Mutation):
     def mutate(self, info, input):
         input = from_global_id(input)[1]
         try:
-            learning_line = Subject.objects.get(pk=input)
+            subject = Subject.objects.get(pk=input)
             Subject.objects.filter(pk=input).delete()
         except Subject.DoesNotExist:
-            raise GraphQLError('Learning Line does not delete')
+            raise GraphQLError('Subject: Subject not found')
 
-        return DeleteSubject(learning_line=learning_line)
+        return DeleteSubject(subject=subject)
         
