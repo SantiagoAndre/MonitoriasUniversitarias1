@@ -38,11 +38,9 @@ class DeleteSubject(Mutation):
 
     def mutate(self, info, input):
         input = from_global_id(input)[1]
-        try:
-            subject = Subject.objects.get(pk=input)
-            Subject.objects.filter(pk=input).delete()
-        except Subject.DoesNotExist:
-            raise GraphQLError('Subject: Subject not found')
-
+       
+        subject = Subject.objects.get(pk=input)
+        Subject.objects.filter(pk=input).delete()
+       
         return DeleteSubject(subject=subject)
         

@@ -147,3 +147,5 @@ STATICFILES_STORAGE =(
 )
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+MAX_DEEP_SUBJECT = config("MAX_DEEP_SUBJECT",default=4,cast=int)
