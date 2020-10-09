@@ -31,10 +31,9 @@ class CreateSubject(Mutation):
 
     def mutate(self, info, input):
         new_input = {}
-        print(dir(input))
-        input.__dict__["learning_line_id"] = int( from_global_id(input.get('learning_line_id'))[1] )
+        input["learning_line_id"] = int( from_global_id(input.get('learning_line_id'))[1] )
         if input.get("parent_id"):
-            input.__dict__["parent_id"]= int( from_global_id(input.get('parent_id'))[1] )
-        subject = Subject.objects.create(**vars(input))
+            input["parent_id"]= int( from_global_id(input.get('parent_id'))[1] )
+        subject = Subject.objects.create(**(input))
         
         return CreateSubject(subject=subject)

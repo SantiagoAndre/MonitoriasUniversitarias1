@@ -12,7 +12,8 @@ from .errors import NameAlreadyUsedException,ParentLearningLineNotFoundException
 def unique_name_learningline(sender,instance, **kwargs):
     instance.name  = process_name(instance.name)
     instance.description = process_large_text(instance.description)
-    if LearningLine.objects.filter(name=instance.name):
+    other_objects = Subject.objects.filter(name=instance.name)
+    if other_objects and other_objects[0].id != instance.id:
         raise NameAlreadyUsedException(_("LearningLine: name already used"))
     print("signal unique ll")
     
@@ -21,11 +22,12 @@ def unique_name_learningline(sender,instance, **kwargs):
 def unique_name_subject(sender,instance, **kwargs):
     instance.name  = process_name(instance.name)
     instance.description = process_large_text(instance.description)
-    if Subject.objects.filter(name=instance.name):
-        raise Exception(_("Subject: name already used"))
+    other_subjects = Subject.objects.filter(name=instance.name)
+    if other_subjects and other_subjects[0].id != instance.id:
+        raise NameAlreadyUsedException(_("Subject: name already used"))
     if instance.parent_id and not Subject.objects.filter(id=instance.parent_id):
         raise ParentSubjectNotFoundException(_("Subject: parent Subject not found"))
-    if not  LearningLine.objects.filter(id=instance.learning_line_id):
+    if instance.learning_line_id and not  LearningLine.objects.filter(id=instance.learning_line_id):
         raise ParentLearningLineNotFoundException(_("Subject: parent Learning Line not found"))
     print("signal unique ss")
 

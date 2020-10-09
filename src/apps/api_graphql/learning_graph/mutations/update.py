@@ -20,10 +20,11 @@ class UpdateLearningLine(Mutation):
     def mutate(self, info, input):
         input["id"]= from_global_id(input.get('id'))[1]
         
-        
-        LearningLine.objects.filter(pk=input.get('id')).update(**input)
         learning_line = LearningLine.objects.get(pk=input.get('id'))
-        
+        if not learning_line:
+            raise LearningLine.DoesNoExist
+        learning_line.__dict__.update(**input)
+        learning_line.save()
         return UpdateLearningLine(learning_line=learning_line)
 
 
@@ -36,8 +37,13 @@ class UpdateSubject(Mutation):
 
     def mutate(self, info, input):
         input["id"]= int( from_global_id(input.get('id'))[1] )
-        print(input)
-        Subject.objects.filter(pk=input.get('id')).update(**input)
+        if "parent_id" in input:
+            input["parent_id"]= int( from_global_id(input.get('parent_id'))[1] )
+        if "learning_line_id" in input:
+            input["learning_line_id"]= int( from_global_id(input.get('learning_line_id'))[1] )
         subject = Subject.objects.get(pk=input.get('id'))
-        
+        if not subject:
+            raise Subject.DoesNoExist
+        subject.__dict__.update(**input)
+        subject.save()
         return UpdateSubject(subject=subject)
