@@ -12,10 +12,10 @@ from .errors import NameAlreadyUsedException,ParentLearningLineNotFoundException
 def unique_name_learningline(sender,instance, **kwargs):
     instance.name  = process_name(instance.name)
     instance.description = process_large_text(instance.description)
-    other_objects = Subject.objects.filter(name=instance.name)
+    other_objects = LearningLine.objects.filter(name=instance.name)
     if other_objects and other_objects[0].id != instance.id:
         raise NameAlreadyUsedException(_("LearningLine: name already used"))
-    print("signal unique ll")
+    
     
 
 @receiver(pre_save,sender=Subject)
@@ -29,7 +29,7 @@ def unique_name_subject(sender,instance, **kwargs):
         raise ParentSubjectNotFoundException(_("Subject: parent Subject not found"))
     if instance.learning_line_id and not  LearningLine.objects.filter(id=instance.learning_line_id):
         raise ParentLearningLineNotFoundException(_("Subject: parent Learning Line not found"))
-    print("signal unique ss")
+    
 
 @receiver(pre_save,sender=Subject)
 def subject_not_circular_relation(sender,instance, **kwargs):

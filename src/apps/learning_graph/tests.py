@@ -1,31 +1,40 @@
 from django.test import TestCase
 
 from .models import LearningLine, Subject
-
-class LearningGraphTest(TestCase):
+from .errors import NameAlreadyUsedException,ParentLearningLineNotFoundException,ParentSubjectNotFoundException,SubjectCircularRealtionException,MaxDeepSubjectException
+from core.settings import MAX_DEEP_SUBJECT
+class LearningLineTest(TestCase):
 
     def setUp(self):
-        obj_test_one = LearningLine.objects.create(name="Pruebas de software", description="Descripcion para la linea de aprendizaje 'Pruebas de software'")
-        obj_test_two = LearningLine.objects.create(name="Pruebas de software", description="Descripcion para la linea de aprendizaje 'Pruebas de software' (case two)")
-
-        obj_test_three = Subject.objects.create(name="Tema 1", description="Descripción para tema 1", parent=None)
-        obj_test_four = Subject.objects.create(name="Subtema 1 de Tema 1", description="Descripción para Subtema 1 de Tema 1", parent=obj_test_three)
-        obj_test_five = Subject(name="Tema 2", description="Descripción para Tema 2", parent=None)
-        obj_test_five.parent = obj_test_five
-        obj_test_five.save()
-    
+        self.same_name1 = "same  name"
+        self.same_name2 = "    same name "
+        obj_test_one = LearningLine.objects.create(name=self.same_name1, description="Descripcion para la linea de aprendizaje ")    
+        
     def test_name_unique(self):
-        objects = LearningLine.objects.filter(name="Pruebas de software")
-        self.assertEqual(len(objects), 1)
+        with self.assertRaises(NameAlreadyUsedException):
+            LearningLine.objects.create(name=self.same_name2, description="Descripcion para la linea de aprendizaje  (case two)")
+class SubjectTest(TestCase):
+    def setUp(self):
+        self.same_name1 = "same  name"
+        self.same_name2 = "    same name "
+        self.learningline1 = LearningLine.objects.create(name=" Pruebas de software ", description="Descripcion para la linea de aprendizaje ")
+        
+        self.subjectparent = Subject.objects.create(name=self.same_name1, description="Descripcion para la linea de aprendizaje s (case two)",learning_line_id=self.learningline1.id)
+        self.subjectchild = Subject.objects.create(name="     Pruebas de software  2  ", description="Descripcion para la linea de aprendiza  (case two)",learning_line_id=self.learningline1.id,parent_id=self.subjectparent.id)
+    def test_name_unique(self):
+        with self.assertRaises(NameAlreadyUsedException):
+            Subject.objects.create(name=self.same_name2, description="Descripcion para la linea de aprendizaje case two)",learning_line_id =self.learningline1.id)
     
     def test_auto_parent(self):
-        subjects = Subject.objects.all()
-        bad_records = []
-        for subject in subjects:
-            if subject.id == subject.parent.id:
-                bad_records.append(subject)
-        self.assertEquals(len(bad_records), 0)
-
-
+        with self.assertRaises(SubjectCircularRealtionException):
+            self.subjectparent.parent_id=self.subjectchild.id
+            self.subjectparent.save()
+    def test_max_deep(self):
+        parent = self.subjectchild
+        for i in range(MAX_DEEP_SUBJECT-1):
+            new_subject = Subject.objects.create(name="     Pruebas de software s   %d"%i, description="Descripcion para la linea de aprendizaje  (case two)",learning_line_id =self.learningline1.id,parent_id=parent.id)
+            parent = new_subject
+            
+        with self.assertRaises(MaxDeepSubjectException):
+            new_subject = Subject.objects.create(name="    sdf Pruebas de software    c", description="Descripcion para la linea de aprendizaje  (case two)",learning_line_id =self.learningline1.id,parent_id=parent.id)
 # * comando python manage.py test apps.learning_graph.tests
-
