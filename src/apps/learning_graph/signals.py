@@ -4,10 +4,10 @@ from django.utils.translation import gettext_lazy as _
 
 from core.settings import MAX_DEEP_SUBJECT
 from .utils import process_name,process_large_text
-from .models import LearningLine,Subject
+from .models import Subject
 from decouple import config
-from .errors import NameAlreadyUsedException,ParentLearningLineNotFoundException,ParentSubjectNotFoundException,SubjectCircularRealtionException,MaxDeepSubjectException
-
+from .errors import NameAlreadyUsedException,ParentSubjectNotFoundException,SubjectCircularRealtionException,MaxDeepSubjectException
+'''
 @receiver(pre_save,sender=LearningLine)
 def unique_name_learningline(sender,instance, **kwargs):
     instance.name  = process_name(instance.name)
@@ -17,7 +17,7 @@ def unique_name_learningline(sender,instance, **kwargs):
         raise NameAlreadyUsedException(_("LearningLine: name already used"))
     
     
-
+'''
 @receiver(pre_save,sender=Subject)
 def unique_name_subject(sender,instance, **kwargs):
     instance.name  = process_name(instance.name)
@@ -27,9 +27,10 @@ def unique_name_subject(sender,instance, **kwargs):
         raise NameAlreadyUsedException(_("Subject: name already used"))
     if instance.parent_id and not Subject.objects.filter(id=instance.parent_id):
         raise ParentSubjectNotFoundException(_("Subject: parent Subject not found"))
+'''    
     if instance.learning_line_id and not  LearningLine.objects.filter(id=instance.learning_line_id):
         raise ParentLearningLineNotFoundException(_("Subject: parent Learning Line not found"))
-    
+''' 
 
 @receiver(pre_save,sender=Subject)
 def subject_not_circular_relation(sender,instance, **kwargs):
