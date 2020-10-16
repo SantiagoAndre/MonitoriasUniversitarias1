@@ -3,7 +3,7 @@ from django.dispatch import receiver
 from django.utils.translation import gettext_lazy as _
 
 from core.settings import MAX_DEEP_SUBJECT
-from .utils import process_name,process_large_text
+from .utils import process_name,process_large_text, validate_blank_or_none, validate_length, validate_special_characters
 from .models import Subject
 from decouple import config
 from .errors import NameAlreadyUsedException,ParentSubjectNotFoundException,SubjectCircularRealtionException,MaxDeepSubjectException
@@ -18,6 +18,9 @@ def unique_name_learningline(sender,instance, **kwargs):
     
     
 '''
+
+    
+#bussines verifications
 @receiver(pre_save,sender=Subject)
 def unique_name_subject(sender,instance, **kwargs):
     instance.name  = process_name(instance.name)
@@ -43,3 +46,15 @@ def subject_not_circular_relation(sender,instance, **kwargs):
         deep+=1   
     if deep> MAX_DEEP_SUBJECT:
         raise MaxDeepSubjectException(_("Subject: Max subject deep is %d" % MAX_DEEP_SUBJECT))
+
+#models validations
+@receiver(pre_save,sender=Subject)
+def subject_model_validations(sender,instance, **kwargs):
+    len_name = 100
+    len_description = 200
+    validate_blank_or_none(instance.name, _("Subject: Name cannot be null or black"))
+    validate_blank_or_none(instance.description, _("Subject: Description cannot be null or black"))
+    validate_length(instance.name,len_name, _("Subject: Name length cannot exceed  %d"%len_name))
+    validate_length(instance.description,len_description, _("Subject: Description length  cannot exceed  %d"%len_description))
+    validate_special_characters(instance.name,_("Subject: Name field contains Special Characters"))
+    validate_special_characters(instance.description,_("Subject: Description field contains Special Characters"))

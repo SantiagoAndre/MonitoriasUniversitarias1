@@ -1,3 +1,4 @@
+from django.utils.translation import gettext_lazy as _
 class NameAlreadyUsedException(Exception):
     pass
 class ParentSubjectNotFoundException(Exception):
@@ -10,3 +11,7 @@ class SubjectCircularRealtionException(Exception):
     pass
 class MaxDeepSubjectException(Exception):
     pass
+class ValidationError(Exception):
+    pass
+# validators 
+
