@@ -10,7 +10,7 @@ from apps.api_graphql.learning_graph.inputs import UpdateSubjectInput
 
 from apps.api_graphql.utils import transform_global_ids
 from apps.api_graphql.utils import delete_attributes_none
-from graphql_relay.node.node import from_global_id
+
 '''
 class UpdateLearningLine(Mutation):
     learning_line = Field(LearningLineNode)
@@ -36,11 +36,7 @@ class UpdateSubject(Mutation):
         input = UpdateSubjectInput(required=True)
 
     def mutate(self, info, input):
-        input["id"]= int( from_global_id(input.get('id'))[1] )
-        if "parent_id" in input:
-            input["parent_id"]= int( from_global_id(input.get('parent_id'))[1] )
-        #if "learning_line_id" in input:
-            #input["learning_line_id"]= int( from_global_id(input.get('learning_line_id'))[1] )
+        input = transform_global_ids(**input)
         subject = Subject.objects.get(pk=input.get('id'))
         if not subject:
             raise Subject.DoesNoExist

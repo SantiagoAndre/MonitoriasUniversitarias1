@@ -8,6 +8,11 @@ class CustomGraphQLView(GraphQLView):
         
         if hasattr(error, 'original_error') and error.original_error:
             formatted = {"message": str(error.original_error)}
-            formatted['code'] = type(error.original_error).__name__
+            formatted['code'] = type(error.original_error).__name__.replace("Exception","")
             return formatted
         return GraphQLView.format_error(error)
+
+
+
+class InvalidIdException(Exception):
+    pass

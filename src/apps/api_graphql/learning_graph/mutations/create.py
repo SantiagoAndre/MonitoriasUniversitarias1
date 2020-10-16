@@ -33,8 +33,7 @@ class CreateSubject(Mutation):
     def mutate(self, info, input):
         new_input = {}
         #input["learning_line_id"] = int( from_global_id(input.get('learning_line_id'))[1] )
-        if input.get("parent_id"):
-            input["parent_id"]= int( from_global_id(input.get('parent_id'))[1] )
+        input = transform_global_ids(**input)
         subject = Subject.objects.create(**(input))
         
         return CreateSubject(subject=subject)
