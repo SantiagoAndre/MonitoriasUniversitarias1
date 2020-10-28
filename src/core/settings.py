@@ -41,7 +41,9 @@ INSTALLED_APPS = [
     'graphene_django',
     'corsheaders',# cors
     'apps.learning_graph',
-    'apps.api_graphql'
+    'apps.api_graphql',
+
+    'apps.monitor',
 ]
 
 MIDDLEWARE = [
