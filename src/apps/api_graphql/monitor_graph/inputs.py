@@ -12,6 +12,10 @@ class MonitorInput(InputObjectType):
     college = String(required=True)
     college_career = String(required=True)
     subject = List(of_type=ID)
+
+    experience = String()
+    service_type = String()
+    short_job = Boolean()
     # username = String(required=True)
     # password = String(required=True)
     # is_superuser = Boolean()

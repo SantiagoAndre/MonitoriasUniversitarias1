@@ -11,7 +11,11 @@ class Monitor(User):
     level_education = models.CharField(max_length=50, blank=False, null=False)
     college = models.CharField(max_length=50, blank=False, null=False)
     college_career = models.CharField(max_length=50, blank=False,null=False)
-
+    """Optionals"""
+    experience = models.CharField(max_length=50,blank=True, null=True)
+    service_type = models.CharField(max_length=50,blank=True, null=True)
+    short_job = models.BooleanField(null=True,default=False)
+    
     subject = models.ManyToManyField(
         Subject, blank=True, related_name='subjects',verbose_name=_("subjects"), max_length=25)
 

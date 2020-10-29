@@ -11,13 +11,15 @@ def process_large_text(text):
 
 
 def validate_length(value, length, error_message):
-    if len(value) > length:
-        raise ValidationError(error_message)
+    try:
+        if len(value) > length:
+            raise ValidationError(error_message)
+    except:
+        pass
     return value
 
 
 def validate_blank_or_none(value, error_message):
-    print("|%s|" % value)
     if value:
         return value
     raise ValidationError(error_message)
