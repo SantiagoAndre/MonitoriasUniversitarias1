@@ -15,7 +15,8 @@ class Monitor(User):
     experience = models.CharField(max_length=50,blank=True, null=True)
     service_type = models.CharField(max_length=50,blank=True, null=True)
     short_job = models.BooleanField(null=True,default=False)
-    
+    career_average = models.FloatField(blank=False, null=True, default=0.0)
+
     subject = models.ManyToManyField(
         Subject, blank=True, related_name='subjects',verbose_name=_("subjects"), max_length=25)
 

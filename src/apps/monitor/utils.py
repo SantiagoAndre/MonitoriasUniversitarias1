@@ -27,6 +27,13 @@ def validate_blank_or_none(value, error_message):
 
 def validate_special_characters(value, error_message):
     string_check = re.compile('[@_!#$%^&*()<>?/\|}{~:]')
-    if string_check.search(value):
-        raise ValidationError(error_message)
+    if value != None:
+        if string_check.search(value):
+            raise ValidationError(error_message)
     return value
+
+def validate_float(value, error_message):
+    try:
+        value = float(value)
+    except expression as identifier:
+        raise ValidationError(error_message)

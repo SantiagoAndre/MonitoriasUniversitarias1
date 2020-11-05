@@ -2,7 +2,7 @@ from django.db.models.signals import pre_save, pre_delete
 from django.dispatch import receiver
 from django.utils.translation import gettext_lazy as _
 
-from .utils import validate_blank_or_none, process_large_text, validate_length, validate_special_characters
+from .utils import validate_blank_or_none, process_large_text, validate_length, validate_special_characters, validate_float
 from .models import Monitor
 from .errors import MonitorLen
 from decouple import config
@@ -15,6 +15,11 @@ from decouple import config
 
 @receiver(pre_save, sender=Monitor)
 def monitor_names(sender, instance, **kwargs):
+    validate_float(instance.career_average,_("Monitor: career average have to be float not string"))
+
+
+@receiver(pre_save, sender=Monitor)
+def monitor_names(sender, instance, **kwargs):
     instance.telephone = process_large_text(instance.telephone)
     instance.residence = process_large_text(instance.residence)
     instance.level_education = process_large_text(instance.level_education)
@@ -23,6 +28,7 @@ def monitor_names(sender, instance, **kwargs):
     instance.first_name = process_large_text(instance.first_name)
     instance.last_name = process_large_text(instance.last_name)
     instance.email = process_large_text(instance.email)
+
 
 @receiver(pre_save, sender=Monitor)
 def monitor_model_null_or_none(sender, instance, **kwargs):
@@ -42,6 +48,7 @@ def monitor_model_null_or_none(sender, instance, **kwargs):
         "Monitor: last name cannot be null or blank"))
     validate_blank_or_none(instance.email, _(
         "Monitor: email cannot be null or blank"))
+
 
 @receiver(pre_save, sender=Monitor)
 def monitor_model_len(sender, instance, **kwargs):

@@ -1,16 +1,24 @@
 # Variables 
-- firstName
-- lastName
-- email
-- telephone 
-- residence 
-- levelEducation 
-- college 
-- collegeCareer
-- experience 
-- serviceType
-- shortJob 
-- subject 
+- firstName: String
+- lastName: String
+- email: String
+- telephone : String
+- residence: String
+- levelEducation: String
+- college: String
+- collegeCareer: String
+- experience: String
+- serviceType: Boolean
+- shortJob: String
+- subject: List(Type ID) Es una lista con los ID's de las áreas de conocimiento(Subjects)
+- careerAverage: Float
+
+#### Nota
+La variable 'subject' es una lista con los ID's de las áreas de conocimiento(Subjects).
+por ejemplo:
+```js
+subject:["U3ViamVjdE5vZGU6MQ==","U3ViamVjdE5vZGU6Mg==","U3ViamVjdE5vZGU6Mw=="]
+```
 
 # Input
 ### Obligatorio
@@ -30,6 +38,7 @@ Las siguientes variables son opcionales, pueden o no pueden ir
 - experience 
 - serviceType: Boolean
 - shortJob 
+- careerAverage: Float
 
 ### Ejemplo
 ```json
@@ -43,7 +52,13 @@ Las siguientes variables son opcionales, pueden o no pueden ir
     "levelEducation": "Universitario",
     "college": "Unicauca",
     "collegeCareer": "ing sistemas",
-    "subject":["U3ViamVjdE5vZGU6MQ==","U3ViamVjdE5vZGU6Mg==","U3ViamVjdE5vZGU6Mw=="]
+    "subject":["U3ViamVjdE5vZGU6MQ==","U3ViamVjdE5vZGU6Mg==","U3ViamVjdE5vZGU6Mw=="],
+
+    //opcionales
+    "experience" :"cinco años trabajando como profesor",
+    "serviceType": true,
+    "shortJob": "Trabajos y tareas",
+    "careerAverage": 4.3,
   }
 }
 ```
