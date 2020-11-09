@@ -21,3 +21,7 @@ class MonitorInput(InputObjectType):
     # password = String(required=True)
     # is_superuser = Boolean()
     # is_staff = Boolean()
+
+class UpdateMonitorInput(InputObjectType):
+    id = ID(required=True)
+    status = String(required=True)

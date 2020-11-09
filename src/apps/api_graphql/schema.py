@@ -12,6 +12,7 @@ from .learning_graph.mutations.create import CreateSubject
 from .learning_graph.mutations.update import UpdateSubject
 from .learning_graph.mutations.delete import DeleteSubject
 from .monitor_graph.mutations.create import CreateMonitor
+from .monitor_graph.mutations.update import UpdateMonitor
 # Schema definition
 
 
@@ -33,5 +34,6 @@ class Mutation(ObjectType):
     update_subject = UpdateSubject.Field()
     delete_subject = DeleteSubject.Field()
     create_monitor = CreateMonitor.Field()
+    update_monitor = UpdateMonitor.Field()
 
 ROOT_SCHEMA = Schema(query=Query, mutation=Mutation)
