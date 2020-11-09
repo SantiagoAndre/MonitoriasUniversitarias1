@@ -33,6 +33,7 @@ class Mutation(ObjectType):
     create_subject = CreateSubject.Field()
     update_subject = UpdateSubject.Field()
     delete_subject = DeleteSubject.Field()
+    
     create_monitor = CreateMonitor.Field()
     update_monitor = UpdateMonitor.Field()
 
