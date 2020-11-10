@@ -12,6 +12,7 @@
 - shortJob: String
 - subject: List(Type ID) Es una lista con los ID's de las áreas de conocimiento(Subjects)
 - careerAverage: Float
+- informaticTool: String
 
 #### Nota
 La variable 'subject' es una lista con los ID's de las áreas de conocimiento(Subjects).
@@ -53,12 +54,13 @@ Las siguientes variables son opcionales, pueden o no pueden ir
     "college": "Unicauca",
     "collegeCareer": "ing sistemas",
     "subject":["U3ViamVjdE5vZGU6MQ==","U3ViamVjdE5vZGU6Mg==","U3ViamVjdE5vZGU6Mw=="],
-
+    
     //opcionales
     "experience" :"cinco años trabajando como profesor",
-    "serviceType": true,
-    "shortJob": "Trabajos y tareas",
+    "serviceType": ["Trabajos","tareas"],
+    "shortJob": true,
     "careerAverage": 4.3,
+    "informaticTool":"si"
   }
 }
 ```

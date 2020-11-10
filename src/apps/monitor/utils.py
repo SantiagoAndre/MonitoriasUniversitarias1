@@ -11,11 +11,9 @@ def process_large_text(text):
 
 
 def validate_length(value, length, error_message):
-    try:
+    if value != None:
         if len(value) > length:
             raise ValidationError(error_message)
-    except:
-        pass
     return value
 
 
