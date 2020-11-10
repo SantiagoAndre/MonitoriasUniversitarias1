@@ -1,5 +1,5 @@
 from graphene import InputObjectType
-from graphene import String, Boolean, List, ID, Float
+from graphene import String, Boolean, List, ID, Float, Int
 
 
 class MonitorInput(InputObjectType):
@@ -17,6 +17,7 @@ class MonitorInput(InputObjectType):
     service_type = String()
     short_job = Boolean()
     career_average = Float()
+    work_hour = Int()
     # username = String(required=True)
     # password = String(required=True)
     # is_superuser = Boolean()

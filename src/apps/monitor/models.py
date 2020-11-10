@@ -24,7 +24,8 @@ class Monitor(User):
     short_job = models.BooleanField(null=True,default=False)
     career_average = models.FloatField(blank=False, null=True, default=0.0)
     status = models.CharField(max_length=12, choices=STATUS_CHOICES, default=PRESELECTION, null=False, blank=True)
-
+    work_hour = models.IntegerField(verbose_name="work_hours", default=1)
+    
     subject = models.ManyToManyField(
         Subject, blank=True, related_name='subjects',verbose_name=_("subjects"), max_length=25)
 
