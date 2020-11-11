@@ -83,15 +83,15 @@ createMonitor(input:$input){
 # Errores
 
 ### Caracteres especiales
-"Monitor: first name field contains Special Characters"
-"Monitor: last name field contains Special Characters"    
-"Monitor: telephone field contains Special Characters"
-"Monitor: residence field contains Special Characters"
-"Monitor: level education field contains Special Characters"
-"Monitor: college field contains Special Characters"    
-"Monitor: college career field contains Special Characters"
-"Monitor: experience field contains Special Characters"
-"Monitor: service type field contains Special Characters"
+- "Monitor: first name field contains Special Characters"
+- "Monitor: last name field contains Special Characters"    
+- "Monitor: telephone field contains Special Characters"
+- "Monitor: residence field contains Special Characters"
+- "Monitor: level education field contains Special Characters"
+- "Monitor: college field contains Special Characters"    
+- "Monitor: college career field contains Special Characters"
+- "Monitor: experience field contains Special Characters"
+- "Monitor: service type field contains Special Characters"
 
 ```json 
 {
@@ -108,13 +108,13 @@ createMonitor(input:$input){
 ```
 ### errores del tamaño de las columnas
 
-"Monitor: telephone length cannot exceed  10" 
-"Monitor: residence length  cannot exceed  50"
-"Monitor: level education length cannot exceed  50"
-"Monitor: college length  cannot exceed  50" 
-"Monitor: college career length cannot exceed  50"
-"Monitor: experience length  cannot exceed  50" 
-"Monitor: service type length cannot exceed  60"
+- "Monitor: telephone length cannot exceed  10" 
+- "Monitor: residence length  cannot exceed  50"
+- "Monitor: level education length cannot exceed  50"
+- "Monitor: college length  cannot exceed  50" 
+- "Monitor: college career length cannot exceed  50"
+- "Monitor: experience length  cannot exceed  50" 
+- "Monitor: service type length cannot exceed  60"
 
 ```json
 {
@@ -131,15 +131,15 @@ createMonitor(input:$input){
 ```
 ### espacios nulos o en blanco
 
-"Monitor: telephone cannot be null or blank"
-"Monitor: residence cannot be null or blank"
-"Monitor: level education cannot be null or blank"
-"Monitor: college cannot be null or blank"
-"Monitor: college career cannot be null or blank"
-"Monitor: first_name cannot be null or blank"
-"Monitor: last name cannot be null or blank"
-"Monitor: email cannot be null or blank"
-"Monitor: service type cannot be null or blank"
+- "Monitor: telephone cannot be null or blank"
+- "Monitor: residence cannot be null or blank"
+- "Monitor: level education cannot be null or blank"
+- "Monitor: college cannot be null or blank"
+- "Monitor: college career cannot be null or blank"
+- "Monitor: first_name cannot be null or blank"
+- "Monitor: last name cannot be null or blank"
+- "Monitor: email cannot be null or blank"
+- "Monitor: service type cannot be null or blank"
 
 ```json
 {
