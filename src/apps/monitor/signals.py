@@ -48,6 +48,8 @@ def monitor_model_null_or_none(sender, instance, **kwargs):
         "Monitor: last name cannot be null or blank"))
     validate_blank_or_none(instance.email, _(
         "Monitor: email cannot be null or blank"))
+    validate_blank_or_none(instance.service_type, _(
+        "Monitor: service type cannot be null or blank"))
 
 
 @receiver(pre_save, sender=Monitor)
@@ -66,12 +68,12 @@ def monitor_model_len(sender, instance, **kwargs):
         "Monitor: college career length cannot exceed  %d" % len_attr))
     validate_length(instance.experience, len_attr, _(
         "Monitor: experience length  cannot exceed  %d" % len_attr))
-    validate_length(instance.service_type, len_attr, _(
+    validate_length(instance.service_type, 100, _(
         "Monitor: service type length cannot exceed  %d" % len_attr))
 
 
 @receiver(pre_save, sender=Monitor)
-def monitor_model_len(sender, instance, **kwargs):
+def monitor_model_special_characteres(sender, instance, **kwargs):
     validate_special_characters(instance.first_name, _(
         "Monitor: first name field contains Special Characters"))
     validate_special_characters(instance.last_name, _(
