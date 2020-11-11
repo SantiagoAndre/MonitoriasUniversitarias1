@@ -20,7 +20,7 @@ class Monitor(User):
     college_career = models.CharField(max_length=50, blank=False,null=False)
     """Optionals"""
     experience = models.CharField(max_length=50,blank=True, null=True)
-    service_type = models.CharField(max_length=50,blank=True, null=True)
+    service_type = models.CharField(max_length=60,blank=True, null=True)
     short_job = models.BooleanField(null=True,default=False)
     career_average = models.FloatField(blank=False, null=True, default=0.0)
     status = models.CharField(max_length=12, choices=STATUS_CHOICES, default=PRESELECTION, null=False, blank=True)
