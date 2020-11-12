@@ -6,11 +6,13 @@ from graphene_django.filter import DjangoFilterConnectionField
 from apps.learning_graph.models import  Subject
 
 from .learning_graph.objects import SubjectNode
+from .monitor_graph.objects import MonitorNode
 
 from .learning_graph.mutations.create import CreateSubject
 from .learning_graph.mutations.update import UpdateSubject
 from .learning_graph.mutations.delete import DeleteSubject
-
+from .monitor_graph.mutations.create import CreateMonitor
+from .monitor_graph.mutations.update import UpdateMonitor
 # Schema definition
 
 
@@ -21,6 +23,7 @@ class Query(ObjectType):
 
     subject = Node.Field(SubjectNode)
     all_subjects = DjangoFilterConnectionField(SubjectNode)
+    all_monitors = DjangoFilterConnectionField(MonitorNode)
 
 
 class Mutation(ObjectType):
@@ -31,6 +34,7 @@ class Mutation(ObjectType):
     update_subject = UpdateSubject.Field()
     delete_subject = DeleteSubject.Field()
     
-
+    create_monitor = CreateMonitor.Field()
+    update_monitor = UpdateMonitor.Field()
 
 ROOT_SCHEMA = Schema(query=Query, mutation=Mutation)
