@@ -11,7 +11,7 @@ class Monitor(User):
     DISCARDED = 'DISCARDED'
     TEST = 'TEST'
     SELECTED = 'SELECTED'
-    STATUS_CHOICES = ((PRESELECTION, 'En preselección'), (DISCARDED, 'No seleccionado'), (TEST, 'En estado de prueba'), (SELECTED, 'Permanente'))
+    STATUS_CHOICES = ((PRESELECTION,_('In preselection')), (DISCARDED, _('Discarted')), (TEST, _('In test state')), (SELECTED, _('Permanent')))
 
     telephone = models.CharField(max_length=10, blank=False)
     residence = models.CharField(max_length=50, blank=False, null=False)

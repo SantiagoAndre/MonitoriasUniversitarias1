@@ -62,7 +62,7 @@ class SubjectTest(TestCase):
         result = ROOT_SCHEMA.execute(edit_parent_subject)
         # verify
         self.assertTrue(len(result.errors) != 0)
-
+ 
     def test_max_deep(self):
         # 1 create parent
         create_parent = self.create_parent.replace("{name}","nameee parent")

@@ -1,6 +1,7 @@
 import dj_database_url
 from decouple import config
 import os
+from django.utils.translation import gettext_lazy as _
 
 
 """
@@ -57,6 +58,9 @@ MIDDLEWARE = [
     'whitenoise.middleware.WhiteNoiseMiddleware',#static files
      'corsheaders.middleware.CorsMiddleware',#cors
     'django.middleware.common.CommonMiddleware',#cors
+    'django.middleware.locale.LocaleMiddleware',#I18n,
+    
+    #'core.middlewares.language_config_middleware.FilterIPMiddleware'
 ]
 
 ROOT_URLCONF = 'core.urls'
@@ -102,8 +106,12 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'es'
 
+LANGUAGES = (
+    ('en-us', _('English')),
+    ('es', _('Spanish'))
+)
 TIME_ZONE = 'UTC'
 
 USE_I18N = True
@@ -111,6 +119,10 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+LOCALE_PATHS = (
+ os.path.join(BASE_DIR,'locale'),
+)
 
 
 # Static files (CSS, JavaScript, Images)
@@ -122,10 +134,23 @@ GRAPHENE = {
     'SCHEMA': 'apps.api_graphql.schema.ROOT_SCHEMA',
 }
 
+
+
+STATIC_URL = '/static/'
+STATICFILES_STORAGE =(
+    os.path.join(BASE_DIR,'static')
+)
+
+MAX_DEEP_SUBJECT = config("MAX_DEEP_SUBJECT",default=4,cast=int)
+
+
+
+
+
+#  ------------Production and Deployment Config ------------------------
+# Allowed hosts ans servers
 CORS_ORIGIN_ALLOW_ALL = True # ALLOW ALL ORIGINS CORS
-#  Production
-
-
+ALLOWED_HOSTS = ["*"]
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = config('SECRET_KEY',default = "secret")
@@ -133,7 +158,7 @@ SECRET_KEY = config('SECRET_KEY',default = "secret")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=True, cast=bool)
 
-ALLOWED_HOSTS = ["*"]
+
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
@@ -142,12 +167,19 @@ DATABASES = {
         default=config("DATABASE_URL",default="sqlite: db.sqlite3")
     )
 }
-
-STATIC_URL = '/static/'
-STATICFILES_STORAGE =(
-    os.path.join(BASE_DIR,'static')
-)
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+if config('PRODUCTION',default=False,cast=bool):
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+    EMAIL_HOST = config('EMAIL_HOST', default='smtp.gmail.com')
+    EMAIL_USE_TLS = True
+    EMAIL_PORT = config('EMAIL_PORT', default=587, cast=int)
+    EMAIL_HOST_USER = config('EMAIL_USER')
+    EMAIL_HOST_PASSWORD = config('EMAIL_USER')
+    
+    
+else:
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+    
 
-MAX_DEEP_SUBJECT = config("MAX_DEEP_SUBJECT",default=4,cast=int)
+

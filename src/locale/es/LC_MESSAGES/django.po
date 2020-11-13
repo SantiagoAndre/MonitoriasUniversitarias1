@@ -1,0 +1,224 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-11-13 05:56-0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: apps/api_graphql/learning_graph/mutations/delete.py:45
+msgid "Subject: Invalid Id Exception"
+msgstr "Tema: Id Invalido"
+
+#: apps/api_graphql/utils.py:18 apps/api_graphql/utils.py:32
+#, python-format
+msgid "%s field contains invalid id"
+msgstr "El campo %s contiene un id invalido"
+
+#: apps/learning_graph/models.py:20
+msgid "name"
+msgstr "nombre"
+
+#: apps/learning_graph/models.py:21
+msgid "description"
+msgstr "descripcion"
+
+#: apps/learning_graph/models.py:22
+msgid "parent subject"
+msgstr "tema padre"
+
+#: apps/learning_graph/signals.py:30
+msgid "Subject: name already used"
+msgstr "Tema: Nombre ya esta siendo usado"
+
+#: apps/learning_graph/signals.py:32
+msgid "Subject: parent Subject not found"
+msgstr "Tema: El padre del tema no existe"
+
+#: apps/learning_graph/signals.py:44
+msgid "Subject: Circular relation with parent"
+msgstr "Tema: Circular relacion con el tema padre"
+
+#: apps/learning_graph/signals.py:48
+#, python-format
+msgid "Subject: Max subject deep is %d"
+msgstr "Tema: Maxima profundidad alcanxada %d"
+
+#: apps/learning_graph/signals.py:55
+msgid "Subject: Name cannot be null or black"
+msgstr "Tema: El nombre no puede ser nulo o vacio"
+
+#: apps/learning_graph/signals.py:56
+msgid "Subject: Description cannot be null or black"
+msgstr "Tema: la descripcion no puede er nula o vacia"
+
+#: apps/learning_graph/signals.py:57
+#, python-format
+msgid "Subject: Name length cannot exceed  %d"
+msgstr "El tamanio del nombre no puede exceder %d "
+
+#: apps/learning_graph/signals.py:58
+#, python-format
+msgid "Subject: Description length  cannot exceed  %d"
+msgstr "El tamanio de la descripcion no puede exceder %d "
+
+#: apps/learning_graph/signals.py:59
+msgid "Subject: Name field contains Special Characters"
+msgstr "Tema: el campo nombre  contiene caracteres especiales"
+
+#: apps/learning_graph/signals.py:60
+msgid "Subject: Description field contains Special Characters"
+msgstr "Tema: el campo Descripcion contiene caracteres especiales"
+
+#: apps/monitor/models.py:14
+msgid "In preselection"
+msgstr "En preseleccion"
+
+#: apps/monitor/models.py:14
+msgid "Discarted"
+msgstr "No seleccionado"
+
+#: apps/monitor/models.py:14
+msgid "In test state"
+msgstr "En estado de prueba"
+
+#: apps/monitor/models.py:14
+msgid "Permanent"
+msgstr "Monitor Permanente"
+
+#: apps/monitor/models.py:31
+msgid "subjects"
+msgstr "Temas"
+
+#: apps/monitor/signals.py:18
+msgid "Monitor: career average have to be float not string"
+msgstr "Monitor: El campo promedio academico no puede ser nulo o vacio"
+
+#: apps/monitor/signals.py:36
+msgid "Monitor: telephone cannot be null or blank"
+msgstr "Monitor: El campo telefono no puede ser nulo o vacio"
+
+#: apps/monitor/signals.py:38
+msgid "Monitor: residence cannot be null or blank"
+msgstr "Monitor: El campo Residencia no puede ser nulo o vacio"
+
+#: apps/monitor/signals.py:40
+msgid "Monitor: level education cannot be null or blank"
+msgstr "Monitor: El campo  nvel de educacion no puede ser nulo o vacio"
+
+#: apps/monitor/signals.py:42
+msgid "Monitor: college cannot be null or blank"
+msgstr "Monitor: El campo Universidad no puede ser nulo o vacio"
+
+#: apps/monitor/signals.py:44
+msgid "Monitor: college career cannot be null or blank"
+msgstr "Monitor: El campo carrera universitaria no puede ser nulo o vacio"
+
+#: apps/monitor/signals.py:46
+msgid "Monitor: first_name cannot be null or blank"
+msgstr "Monitor: El campo primer nombre no puede ser nulo o vacio"
+
+#: apps/monitor/signals.py:48
+msgid "Monitor: last name cannot be null or blank"
+msgstr "Monitor: El campo segundo nombre no puede ser nulo o vacio"
+
+#: apps/monitor/signals.py:50
+msgid "Monitor: email cannot be null or blank"
+msgstr "Monitor: El campo email no puede ser nulo o vacio"
+
+#: apps/monitor/signals.py:52
+msgid "Monitor: service type cannot be null or blank"
+msgstr "Monitor: El campo no puede ser nulo o vacio"
+
+#: apps/monitor/signals.py:60
+#, python-format
+msgid "Monitor: telephone length cannot exceed  %d"
+msgstr "Monitor: la longitud del campo telefono  no puede exceder %d"
+
+#: apps/monitor/signals.py:62
+#, python-format
+msgid "Monitor: residence length  cannot exceed  %d"
+msgstr "Monitor: la longitud del residencia  no puede exceder %d"
+
+#: apps/monitor/signals.py:64
+#, python-format
+msgid "Monitor: level education length cannot exceed  %d"
+msgstr "Monitor: la longitud del campo Nivel de educacion  no puede exceder %d"
+
+#: apps/monitor/signals.py:66
+#, python-format
+msgid "Monitor: college length  cannot exceed  %d"
+msgstr "Monitor: la longitud del campo Universidad no puede exceder %d"
+
+#: apps/monitor/signals.py:68
+#, python-format
+msgid "Monitor: college career length cannot exceed  %d"
+msgstr "Monitor: la longitud del campo Carrera no puede exceder %d"
+
+
+#: apps/monitor/signals.py:70
+#, python-format
+msgid "Monitor: experience length  cannot exceed  %d"
+msgstr "Monitor: la longitud del campo experiencia  no puede exceder %d"
+
+#: apps/monitor/signals.py:72
+#, python-format
+msgid "Monitor: service type length cannot exceed  %d"
+msgstr "Monitor: la longitud del campo tipo de servicio no puede exceder %d"
+
+#: apps/monitor/signals.py:78
+msgid "Monitor: first name field contains Special Characters"
+msgstr "Monitor: el campo primer nombre contiene caracteres especiales"
+
+#: apps/monitor/signals.py:80
+msgid "Monitor: last name field contains Special Characters"
+msgstr "Monitor: el campo segundo nombre contiene caracteres especiales"
+
+#: apps/monitor/signals.py:82
+msgid "Monitor: telephone field contains Special Characters"
+msgstr "Monitor: el campo telefono contiene caracteres especiales"
+
+#: apps/monitor/signals.py:84
+msgid "Monitor: residence field contains Special Characters"
+msgstr "Monitor: el campo Residencia contiene caracteres especiales"
+
+#: apps/monitor/signals.py:86
+msgid "Monitor: level education field contains Special Characters"
+msgstr "Monitor: el campo Nivel educativo contiene caracteres especiales"
+
+#: apps/monitor/signals.py:88
+msgid "Monitor: college field contains Special Characters"
+msgstr "Monitor: el campo Universidad contiene caracteres especiales"
+
+#: apps/monitor/signals.py:90
+msgid "Monitor: college career field contains Special Characters"
+msgstr "Monitor: el campo Carrera contiene caracteres especiales"
+"Monitor: el campo de la carrera universitaria contiene caracteres especiales"
+
+#: apps/monitor/signals.py:92
+msgid "Monitor: experience field contains Special Characters"
+msgstr "Monitor: el campo de experiencia contiene caracteres especiales"
+
+#: apps/monitor/signals.py:94
+msgid "Monitor: service type field contains Special Characters"
+msgstr "Monitor: el campo de tipo de servicio contiene caracteres especiales"
+
+#: core/settings.py:112
+msgid "English"
+msgstr "Ingles"
+
+#: core/settings.py:113
+msgid "Spanish"
+msgstr "Español"
