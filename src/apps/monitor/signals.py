@@ -1,17 +1,42 @@
-from django.db.models.signals import pre_save, pre_delete
+from django.db.models.signals import pre_save, post_save
 from django.dispatch import receiver
 from django.utils.translation import gettext_lazy as _
 
-from .utils import validate_blank_or_none, process_large_text, validate_length, validate_special_characters, validate_float
+from .utils import validate_blank_or_none, process_large_text, validate_length, validate_special_characters, validate_float, get_status_position
 from .models import Monitor
-from .errors import MonitorLen
-from decouple import config
+from .errors import MonitorLen, InconsistentStatusException
+from .emails import send_email_status_monitor
+
 
 # @receiver(pre_delete,sender=Monitor)
 # def pre_delete_story(sender, instance, **kwargs):
 #     for s in instance.subject.all():
 #         s.delete()
 
+
+@receiver(pre_save, sender=Monitor)
+def validate_status_change(sender, instance, **kwargs):
+    
+    VALID_STATUS_CHANGES = (
+        (Monitor.PRESELECTION,Monitor.DISCARDED),
+        (Monitor.PRESELECTION,Monitor.TEST),
+        (Monitor.TEST,Monitor.DISCARDED),
+        (Monitor.TEST,Monitor.SELECTED),
+    )
+    if instance._state.adding:
+        if instance.status != Monitor.PRESELECTION: # Se esta creando
+            raise InconsistentStatusException(_("First value Monitor status must be 'PRESELECTION'"))
+    elif instance.status_tracker.has_changed("status"):
+        previous =  instance.status_tracker.changed()["status"]
+        actual = instance.status 
+        if (previous,actual) not in VALID_STATUS_CHANGES:
+            raise InconsistentStatusException(_("Monitor: cannot change status from %s to %s"%(previous,actual))) 
+
+
+@receiver(post_save, sender=Monitor)
+def send_email(sender, instance, **kwargs):
+    if instance.status_tracker.has_changed("status"):
+        send_email_status_monitor(instance)
 
 @receiver(pre_save, sender=Monitor)
 def monitor_names(sender, instance, **kwargs):
@@ -32,63 +57,42 @@ def monitor_names(sender, instance, **kwargs):
 
 @receiver(pre_save, sender=Monitor)
 def monitor_model_null_or_none(sender, instance, **kwargs):
-    validate_blank_or_none(instance.telephone, _(
-        "Monitor: telephone cannot be null or blank"))
-    validate_blank_or_none(instance.residence, _(
-        "Monitor: residence cannot be null or blank"))
-    validate_blank_or_none(instance.level_education, _(
-        "Monitor: level education cannot be null or blank"))
-    validate_blank_or_none(instance.college, _(
-        "Monitor: college cannot be null or blank"))
-    validate_blank_or_none(instance.college_career, _(
-        "Monitor: college career cannot be null or blank"))
-    validate_blank_or_none(instance.first_name, _(
-        "Monitor: first_name cannot be null or blank"))
-    validate_blank_or_none(instance.last_name, _(
-        "Monitor: last name cannot be null or blank"))
-    validate_blank_or_none(instance.email, _(
-        "Monitor: email cannot be null or blank"))
-    validate_blank_or_none(instance.service_type, _(
-        "Monitor: service type cannot be null or blank"))
+    blank_or_none_message =  _("Monitor: %s  cannot be null or blank")
+    validate_blank_or_none(instance.telephone, (blank_or_none_message % _("telephone") ))
+    validate_blank_or_none(instance.residence,(blank_or_none_message % _("recidence") ) )
+    validate_blank_or_none(instance.level_education,(blank_or_none_message % _("education level") ))
+    validate_blank_or_none(instance.college,(blank_or_none_message % _("college") ))
+    validate_blank_or_none(instance.college_career, (blank_or_none_message % _("college career") ))
+    validate_blank_or_none(instance.first_name, (blank_or_none_message % _("first name") ))
+    validate_blank_or_none(instance.last_name,(blank_or_none_message % _("last name") ))
+    validate_blank_or_none(instance.email, (blank_or_none_message % _("email") ))
+    print(instance.service_type)
+    #validate_blank_or_none(instance.service_type,(blank_or_none_message % _("service type") ))
 
 
 @receiver(pre_save, sender=Monitor)
 def monitor_model_len(sender, instance, **kwargs):
+    max_length_message = _("Monitor: %s length cannot exceed  %d")
     len_telephone = 10
     len_attr = 50
-    validate_length(instance.telephone, len_telephone, _(
-        "Monitor: telephone length cannot exceed  %d" % len_telephone))
-    validate_length(instance.residence, len_attr, _(
-        "Monitor: residence length  cannot exceed  %d" % len_attr))
-    validate_length(instance.level_education, len_attr, _(
-        "Monitor: level education length cannot exceed  %d" % len_attr))
-    validate_length(instance.college, len_attr, _(
-        "Monitor: college length  cannot exceed  %d" % len_attr))
-    validate_length(instance.college_career, len_attr, _(
-        "Monitor: college career length cannot exceed  %d" % len_attr))
-    validate_length(instance.experience, len_attr, _(
-        "Monitor: experience length  cannot exceed  %d" % len_attr))
-    validate_length(instance.service_type, 100, _(
-        "Monitor: service type length cannot exceed  %d" % len_attr))
+    validate_length(instance.telephone, len_telephone, (max_length_message % (_("telephone"),len_telephone)))
+    validate_length(instance.residence, len_attr, (max_length_message % (_("residence"),len_attr)))
+    validate_length(instance.level_education, len_attr, (max_length_message % (_("education level"),len_attr)))
+    validate_length(instance.college, len_attr, (max_length_message % (_("college"),len_attr)))
+    validate_length(instance.college_career, len_attr, (max_length_message % (_("college career"),len_attr)))
+    validate_length(instance.experience, len_attr, (max_length_message % (_("experience"),len_attr)))
+    validate_length(instance.service_type, 100, (max_length_message % (_("service type"),100)))
 
 
 @receiver(pre_save, sender=Monitor)
 def monitor_model_special_characteres(sender, instance, **kwargs):
-    validate_special_characters(instance.first_name, _(
-        "Monitor: first name field contains Special Characters"))
-    validate_special_characters(instance.last_name, _(
-        "Monitor: last name field contains Special Characters"))
-    validate_special_characters(instance.telephone, _(
-        "Monitor: telephone field contains Special Characters"))
-    validate_special_characters(instance.residence, _(
-        "Monitor: residence field contains Special Characters"))
-    validate_special_characters(instance.level_education, _(
-        "Monitor: level education field contains Special Characters"))
-    validate_special_characters(instance.college, _(
-        "Monitor: college field contains Special Characters"))
-    validate_special_characters(instance.college_career, _(
-        "Monitor: college career field contains Special Characters"))
-    validate_special_characters(instance.experience, _(
-        "Monitor: experience field contains Special Characters"))
-    validate_special_characters(instance.service_type, _(
-        "Monitor: service type field contains Special Characters"))
+    special_characters_msg= _("Monitor: %s field contains Special Characters")
+    validate_special_characters(instance.first_name, (special_characters_msg % _("fist name")))
+    validate_special_characters(instance.last_name, (special_characters_msg % _("last name")))
+    validate_special_characters(instance.telephone,(special_characters_msg % _("telephone")))
+    validate_special_characters(instance.residence, (special_characters_msg % _("residence")))
+    validate_special_characters(instance.level_education, (special_characters_msg % _("education level")))
+    validate_special_characters(instance.college,(special_characters_msg % _("college")))
+    validate_special_characters(instance.college_career,(special_characters_msg % _("college career")))
+    validate_special_characters(instance.experience,(special_characters_msg % _("experience")))
+    validate_special_characters(instance.service_type,(special_characters_msg % _("fist name")))

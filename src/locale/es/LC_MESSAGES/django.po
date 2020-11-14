@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-13 05:56-0500\n"
+"POT-Creation-Date: 2020-11-14 12:53-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,12 +20,12 @@ msgstr ""
 
 #: apps/api_graphql/learning_graph/mutations/delete.py:45
 msgid "Subject: Invalid Id Exception"
-msgstr "Tema: Id Invalido"
+msgstr "Tema: Excepcion, Id invalido"
 
 #: apps/api_graphql/utils.py:18 apps/api_graphql/utils.py:32
 #, python-format
 msgid "%s field contains invalid id"
-msgstr "El campo %s contiene un id invalido"
+msgstr "%s contiene un id invalido"
 
 #: apps/learning_graph/models.py:20
 msgid "name"
@@ -37,183 +37,259 @@ msgstr "descripcion"
 
 #: apps/learning_graph/models.py:22
 msgid "parent subject"
-msgstr "tema padre"
+msgstr "Tema padre"
 
 #: apps/learning_graph/signals.py:30
 msgid "Subject: name already used"
-msgstr "Tema: Nombre ya esta siendo usado"
+msgstr "Tema: nombre ya esta siendo usado"
 
 #: apps/learning_graph/signals.py:32
 msgid "Subject: parent Subject not found"
-msgstr "Tema: El padre del tema no existe"
+msgstr "Tema: tema padre no encontrado"
 
-#: apps/learning_graph/signals.py:44
+#: apps/learning_graph/signals.py:41
 msgid "Subject: Circular relation with parent"
-msgstr "Tema: Circular relacion con el tema padre"
+msgstr "Tema: Relacion Circular con el tema padre"
 
-#: apps/learning_graph/signals.py:48
+#: apps/learning_graph/signals.py:45
 #, python-format
 msgid "Subject: Max subject deep is %d"
-msgstr "Tema: Maxima profundidad alcanxada %d"
+msgstr "Tema: La profundidad maxima es %d"
 
-#: apps/learning_graph/signals.py:55
-msgid "Subject: Name cannot be null or black"
-msgstr "Tema: El nombre no puede ser nulo o vacio"
-
-#: apps/learning_graph/signals.py:56
-msgid "Subject: Description cannot be null or black"
-msgstr "Tema: la descripcion no puede er nula o vacia"
-
-#: apps/learning_graph/signals.py:57
+#: apps/learning_graph/signals.py:52
 #, python-format
-msgid "Subject: Name length cannot exceed  %d"
-msgstr "El tamanio del nombre no puede exceder %d "
+msgid "Subject: %s cannot be null or black"
+msgstr "Tema: el campo %s no puede ser nulo o vacio"
 
-#: apps/learning_graph/signals.py:58
+#: apps/learning_graph/signals.py:53
 #, python-format
-msgid "Subject: Description length  cannot exceed  %d"
-msgstr "El tamanio de la descripcion no puede exceder %d "
+msgid "Subject: %s length cannot exceed  %d"
+msgstr "Tema: El tamaño campo %s no pude exceder   %d "
 
-#: apps/learning_graph/signals.py:59
-msgid "Subject: Name field contains Special Characters"
-msgstr "Tema: el campo nombre  contiene caracteres especiales"
+#: apps/learning_graph/signals.py:54
+#, python-format
+msgid "Subject: %s field contains Special Characters"
+msgstr "Tema: El campo %s contiene caracteres especiales"
 
-#: apps/learning_graph/signals.py:60
-msgid "Subject: Description field contains Special Characters"
-msgstr "Tema: el campo Descripcion contiene caracteres especiales"
+#: apps/learning_graph/signals.py:55 apps/learning_graph/signals.py:56
+#: apps/learning_graph/signals.py:58 apps/learning_graph/signals.py:60
+msgid "Name"
+msgstr "Nombre"
 
-#: apps/monitor/models.py:14
+#: apps/learning_graph/signals.py:59 apps/learning_graph/signals.py:61
+msgid "Description"
+msgstr "Descripcion"
+
+#: apps/monitor/emails.py:9
+msgid "Successful Registration"
+msgstr "Registro Exitoso"
+
+#: apps/monitor/emails.py:13
+msgid "Welcome to trial period"
+msgstr "Bienvenido al periodo de prueba"
+
+#: apps/monitor/emails.py:17
+msgid "Welcome to the Monitorías Universitarias Team"
+msgstr "Benvenido al equipo de Monitorías Universitarias"
+
+#: apps/monitor/emails.py:31
+msgid "Monitorías Universitarias hiring process"
+msgstr "proceso de contratacion de Monitorías Universitarias"
+
+#: apps/monitor/models.py:16
 msgid "In preselection"
 msgstr "En preseleccion"
 
-#: apps/monitor/models.py:14
+#: apps/monitor/models.py:16
 msgid "Discarted"
-msgstr "No seleccionado"
+msgstr "Descartado"
 
-#: apps/monitor/models.py:14
+#: apps/monitor/models.py:16
 msgid "In test state"
 msgstr "En estado de prueba"
 
-#: apps/monitor/models.py:14
+#: apps/monitor/models.py:16
 msgid "Permanent"
-msgstr "Monitor Permanente"
+msgstr "Permanente"
 
-#: apps/monitor/models.py:31
+#: apps/monitor/models.py:33
 msgid "subjects"
-msgstr "Temas"
+msgstr "temas"
 
-#: apps/monitor/signals.py:18
+#: apps/monitor/signals.py:28
+msgid "First value Monitor status must be 'PRESELECTION'"
+msgstr "El primer estado del Monitor debe ser `PRESELECTION`"
+
+#: apps/monitor/signals.py:33
+#, python-format
+msgid "Monitor: cannot change status from %s to %s"
+msgstr "Monitor: No se puede cambia el estado de %s a %s"
+
+#: apps/monitor/signals.py:43
 msgid "Monitor: career average have to be float not string"
-msgstr "Monitor: El campo promedio academico no puede ser nulo o vacio"
-
-#: apps/monitor/signals.py:36
-msgid "Monitor: telephone cannot be null or blank"
-msgstr "Monitor: El campo telefono no puede ser nulo o vacio"
-
-#: apps/monitor/signals.py:38
-msgid "Monitor: residence cannot be null or blank"
-msgstr "Monitor: El campo Residencia no puede ser nulo o vacio"
-
-#: apps/monitor/signals.py:40
-msgid "Monitor: level education cannot be null or blank"
-msgstr "Monitor: El campo  nvel de educacion no puede ser nulo o vacio"
-
-#: apps/monitor/signals.py:42
-msgid "Monitor: college cannot be null or blank"
-msgstr "Monitor: El campo Universidad no puede ser nulo o vacio"
-
-#: apps/monitor/signals.py:44
-msgid "Monitor: college career cannot be null or blank"
-msgstr "Monitor: El campo carrera universitaria no puede ser nulo o vacio"
-
-#: apps/monitor/signals.py:46
-msgid "Monitor: first_name cannot be null or blank"
-msgstr "Monitor: El campo primer nombre no puede ser nulo o vacio"
-
-#: apps/monitor/signals.py:48
-msgid "Monitor: last name cannot be null or blank"
-msgstr "Monitor: El campo segundo nombre no puede ser nulo o vacio"
-
-#: apps/monitor/signals.py:50
-msgid "Monitor: email cannot be null or blank"
-msgstr "Monitor: El campo email no puede ser nulo o vacio"
-
-#: apps/monitor/signals.py:52
-msgid "Monitor: service type cannot be null or blank"
-msgstr "Monitor: El campo no puede ser nulo o vacio"
+msgstr "Monitor: Promedio academico debe ser Decimal no una Cadena"
 
 #: apps/monitor/signals.py:60
 #, python-format
-msgid "Monitor: telephone length cannot exceed  %d"
-msgstr "Monitor: la longitud del campo telefono  no puede exceder %d"
+msgid "Monitor: %s  cannot be null or blank"
+msgstr "Monitor: El campo %s no puede ser nulo o vacio"
+
+#: apps/monitor/signals.py:61 apps/monitor/signals.py:78
+#: apps/monitor/signals.py:92
+msgid "telephone"
+msgstr "telefono"
 
 #: apps/monitor/signals.py:62
-#, python-format
-msgid "Monitor: residence length  cannot exceed  %d"
-msgstr "Monitor: la longitud del residencia  no puede exceder %d"
+msgid "recidence"
+msgstr "recidencia"
 
-#: apps/monitor/signals.py:64
-#, python-format
-msgid "Monitor: level education length cannot exceed  %d"
-msgstr "Monitor: la longitud del campo Nivel de educacion  no puede exceder %d"
+#: apps/monitor/signals.py:63 apps/monitor/signals.py:80
+#: apps/monitor/signals.py:94
+msgid "education level"
+msgstr "Nivel de educacion"
+
+#: apps/monitor/signals.py:64 apps/monitor/signals.py:81
+#: apps/monitor/signals.py:95
+msgid "college"
+msgstr "Universidad"
+
+#: apps/monitor/signals.py:65 apps/monitor/signals.py:82
+#: apps/monitor/signals.py:96
+msgid "college career"
+msgstr "Carrera Universitaria"
 
 #: apps/monitor/signals.py:66
-#, python-format
-msgid "Monitor: college length  cannot exceed  %d"
-msgstr "Monitor: la longitud del campo Universidad no puede exceder %d"
+msgid "first name"
+msgstr "primer nombre"
+
+#: apps/monitor/signals.py:67 apps/monitor/signals.py:91
+msgid "last name"
+msgstr "segundo nombre"
 
 #: apps/monitor/signals.py:68
+msgid "email"
+msgstr "correo"
+
+#: apps/monitor/signals.py:75
 #, python-format
-msgid "Monitor: college career length cannot exceed  %d"
-msgstr "Monitor: la longitud del campo Carrera no puede exceder %d"
+msgid "Monitor: %s length cannot exceed  %d"
+msgstr "Monitor: El  tamaño del campo %s no puede exceder %d "
 
+#: apps/monitor/signals.py:79 apps/monitor/signals.py:93
+msgid "residence"
+msgstr "recidencia"
 
-#: apps/monitor/signals.py:70
-#, python-format
-msgid "Monitor: experience length  cannot exceed  %d"
-msgstr "Monitor: la longitud del campo experiencia  no puede exceder %d"
-
-#: apps/monitor/signals.py:72
-#, python-format
-msgid "Monitor: service type length cannot exceed  %d"
-msgstr "Monitor: la longitud del campo tipo de servicio no puede exceder %d"
-
-#: apps/monitor/signals.py:78
-msgid "Monitor: first name field contains Special Characters"
-msgstr "Monitor: el campo primer nombre contiene caracteres especiales"
-
-#: apps/monitor/signals.py:80
-msgid "Monitor: last name field contains Special Characters"
-msgstr "Monitor: el campo segundo nombre contiene caracteres especiales"
-
-#: apps/monitor/signals.py:82
-msgid "Monitor: telephone field contains Special Characters"
-msgstr "Monitor: el campo telefono contiene caracteres especiales"
+#: apps/monitor/signals.py:83 apps/monitor/signals.py:97
+msgid "experience"
+msgstr "experiencia"
 
 #: apps/monitor/signals.py:84
-msgid "Monitor: residence field contains Special Characters"
-msgstr "Monitor: el campo Residencia contiene caracteres especiales"
+msgid "service type"
+msgstr "tipo de servicio"
 
-#: apps/monitor/signals.py:86
-msgid "Monitor: level education field contains Special Characters"
-msgstr "Monitor: el campo Nivel educativo contiene caracteres especiales"
+#: apps/monitor/signals.py:89
+#, python-format
+msgid "Monitor: %s field contains Special Characters"
+msgstr "Monitor: El campo %s contiene caracteres especiales"
 
-#: apps/monitor/signals.py:88
-msgid "Monitor: college field contains Special Characters"
-msgstr "Monitor: el campo Universidad contiene caracteres especiales"
+#: apps/monitor/signals.py:90 apps/monitor/signals.py:98
+msgid "fist name"
+msgstr "primer nombre"
 
-#: apps/monitor/signals.py:90
-msgid "Monitor: college career field contains Special Characters"
-msgstr "Monitor: el campo Carrera contiene caracteres especiales"
-"Monitor: el campo de la carrera universitaria contiene caracteres especiales"
+#: apps/monitor/templates/emails/registered.html:7
+msgid "Successful registration, we have received your information"
+msgstr "Registro exitoso, hemos recibido tu informacion"
 
-#: apps/monitor/signals.py:92
-msgid "Monitor: experience field contains Special Characters"
-msgstr "Monitor: el campo de experiencia contiene caracteres especiales"
+#: apps/monitor/templates/emails/registered.html:9
+#, python-format
+msgid ""
+"\n"
+"        Hello  %(username)s, We are happy that you want to be part of our "
+"team of monitors. We have received your information, we will review it and "
+"soon we will send you an email informing you if you are the profile we are "
+"looking for. While we leave you some guides with detailed information about "
+"us and the job you applied for.\n"
+"        "
+msgstr ""
+"\n"
+"Hola, %(username)s, Nos alegra que quieras formar parte de nuestro equipo de "
+"monitores. Hemos recibido tu información, la revisaremos y próximamente te "
+"enviaremos un correo electrónico informándote si eres el perfil que estamos "
+"buscando. Mientras te dejamos unas guías con información detallada sobre "
+"nosotros y el trabajo al que te acabas de postular."
 
-#: apps/monitor/signals.py:94
-msgid "Monitor: service type field contains Special Characters"
-msgstr "Monitor: el campo de tipo de servicio contiene caracteres especiales"
+#: apps/monitor/templates/emails/registered.html:15
+msgid "The Selection process."
+msgstr "El proceso de seleccion"
+
+#: apps/monitor/templates/emails/registered.html:16
+msgid "Before to apply."
+msgstr "Antes de aplicar"
+
+#: apps/monitor/templates/emails/registered.html:17
+msgid "After you apply."
+msgstr "Despues de aplicar"
+
+#: apps/monitor/templates/emails/registered.html:18
+msgid "Trial period."
+msgstr "Periodo de Prueba"
+
+#: apps/monitor/templates/emails/selected.html:9
+msgid "You  have been selected, you are a permanent Monitor"
+msgstr "Bienvenido al equipo, has sido seleccionado como monitor permanente"
+
+#: apps/monitor/templates/emails/selected.html:11
+#, python-format
+msgid ""
+"\n"
+"        Hello  %(username)s, You have successfully completed the missions of "
+"the trial period, we have seen what you are capable of, that is why we have "
+"selected you as a monitor.\n"
+"        "
+msgstr ""
+"\n"
+"Hola %(username)s, Has completado con éxito las misiones del período de "
+"prueba, hemos visto de lo que eres capaz, por eso te hemos seleccionado como "
+"monitor."
+
+#: apps/monitor/templates/emails/selected.html:15
+msgid "Whats  Next?"
+msgstr "¿Que sigue?"
+
+#: apps/monitor/templates/emails/selected.html:16
+msgid ""
+"Complete the configuration of your information on our platform (schedules, "
+"means of payment), the application will receive notifications of new "
+"students who need your help."
+msgstr "Completa la configuración de tu información en nuestra plataforma (horarios, medios de pago), len la aplicación recibirás notificaciones de nuevos alumnos que necesiten tu ayuda."
+
+#: apps/monitor/templates/emails/trial_period.html:8
+msgid "You are in the pre-selection period."
+msgstr "En hora buena, Estas en periodo de prueba"
+
+#: apps/monitor/templates/emails/trial_period.html:10
+#, python-format
+msgid ""
+"\n"
+"        Hello %(username)s, We have seen your profile, and we believe that "
+"you are the monitor we are looking for, that is why you are now in a trial "
+"period. We hope to be working together soon. \n"
+"        "
+msgstr ""
+"\n"
+"Hola %(username)s, Hemos visto tu perfil y creemos que eres el monitor que "
+"estamos buscando, por eso ahora estás en un período de prueba. Esperamos "
+"trabajar juntos pronto."
+
+#: apps/monitor/templates/emails/trial_period.html:14
+msgid ""
+"In this period we will do a small exam to validate your knowledge, we will "
+"give you a mission and we will be monitoring your activity, we will be "
+"available for any questions you have."
+msgstr ""
+"En este período haremos un pequeño examen para validar tus conocimientos, te "
+"daremos una misión y estaremos monitoreando tu actividad, estaremos "
+"disponibles para cualquier duda que tengas."
 
 #: core/settings.py:112
 msgid "English"

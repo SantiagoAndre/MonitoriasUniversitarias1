@@ -18,6 +18,8 @@ dj-database-url = "*"
 psycopg2-binary = "*"
 psycopg2 = "*"
 django-cors-headers = "*"
+django-model-utils = "*"
+
 [dev-packages]
 pylint = "*"
 pylint-django = "*"

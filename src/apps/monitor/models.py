@@ -1,7 +1,9 @@
 from django.db import models
+from django.utils.translation import gettext_lazy as _
+from model_utils import FieldTracker
 from django.contrib.auth.models import User
 from apps.learning_graph.models import Subject
-from django.utils.translation import gettext_lazy as _
+
 # Create your models here.
 
 
@@ -29,6 +31,7 @@ class Monitor(User):
     
     subject = models.ManyToManyField(
         Subject, blank=True, related_name='subjects',verbose_name=_("subjects"), max_length=25)
-
+    status_tracker = FieldTracker(fields=['status'])
+    
     def __str__(self):
         return self.first_name + self.last_name

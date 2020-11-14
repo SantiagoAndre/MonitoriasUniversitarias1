@@ -1,0 +1,18 @@
+{% load i18n %}
+<html>
+<head>
+
+</head>
+<body>
+    
+    <h1>{%translate "You are in the pre-selection period."  %}</h1>
+    <p>
+        {% blocktranslate with username=username %}
+        Hello {{username}}, We have seen your profile, and we believe that you are the monitor we are looking for, that is why you are now in a trial period. We hope to be working together soon. 
+        {% endblocktranslate %}
+    </p>
+    <p>{%translate "In this period we will do a small exam to validate your knowledge, we will give you a mission and we will be monitoring your activity, we will be available for any questions you have."%}</p>
+
+    
+</body>
+</html>

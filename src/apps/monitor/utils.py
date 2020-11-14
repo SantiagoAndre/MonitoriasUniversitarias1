@@ -35,3 +35,9 @@ def validate_float(value, error_message):
         value = float(value)
     except expression as identifier:
         raise ValidationError(error_message)
+
+def get_status_position(status, STATUS_TUPLE):
+    for i,(vstatus,_) in enumerate(STATUS_TUPLE):
+        if vstatus == status:
+            return i
+    return -1

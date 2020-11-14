@@ -1,0 +1,21 @@
+{% load i18n %}
+<html>
+<head>
+
+</head>
+<body>
+    <h1>{% translate "Successful registration, we have received your information" %}</h1>
+    <p>
+        {% blocktranslate with username=username %}
+        Hello  {{username}}, We are happy that you want to be part of our team of monitors. We have received your information, we will review it and soon we will send you an email informing you if you are the profile we are looking for. While we leave you some guides with detailed information about us and the job you applied for.
+        {% endblocktranslate %}
+
+    </p>
+        <p>
+            - {%  translate "The Selection process." %}<br>
+            - {%  translate "Before to apply." %}<br>
+            - {%  translate "After you apply." %}<br>
+            - {%  translate "Trial period." %}<br>
+        </p>
+</body>
+</html>

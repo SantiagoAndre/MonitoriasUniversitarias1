@@ -1,0 +1,19 @@
+{% load i18n %}
+<html>
+<head>
+
+</head>
+<body>
+    
+    
+    <h1>{%translate "You  have been selected, you are a permanent Monitor" %}</h1>
+    <p>
+        {% blocktranslate with username=username %}
+        Hello  {{username}}, You have successfully completed the missions of the trial period, we have seen what you are capable of, that is why we have selected you as a monitor.
+        {% endblocktranslate %}
+     </p>
+    <h3>{%translate "Whats  Next?"%}</h3>
+    <p> {%translate "Complete the configuration of your information on our platform (schedules, means of payment), the application will receive notifications of new students who need your help."%}</p>
+    
+</body>
+</html>

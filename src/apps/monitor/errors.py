@@ -9,3 +9,6 @@ class MonitorLen(Exception):
 
 class ValidationError(Exception):
     pass
+
+class InconsistentStatusException(Exception):
+    pass

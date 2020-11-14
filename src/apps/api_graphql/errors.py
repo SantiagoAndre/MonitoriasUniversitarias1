@@ -22,10 +22,9 @@ class CustomGraphQLView(GraphQLView):
         return response
     def __set_language_system(request,response):
         
-        code = response.COOKIES[LANGUAGE_SESSION_KEY] 
-        
-        select_language(code)
-
+        if LANGUAGE_SESSION_KEY in response.COOKIES:
+            code = response.COOKIES[LANGUAGE_SESSION_KEY]
+            select_language(code)
 
 class InvalidIdException(Exception):
     pass
