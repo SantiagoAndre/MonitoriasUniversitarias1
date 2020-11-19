@@ -154,3 +154,20 @@ createMonitor(input:$input){
   }
 }
 ```
+
+### Query Monitors
+
+```graphql
+query {
+  allMonitors(firstName:"pipe",email:"correo@dominio.co"){
+    edges{
+      node{
+        firstName
+        lastName
+        email
+        status
+      }
+    }
+  }
+}
+```

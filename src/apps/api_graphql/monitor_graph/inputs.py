@@ -11,18 +11,14 @@ class MonitorInput(InputObjectType):
     level_education = String(required=True)
     college = String(required=True)
     college_career = String(required=True)
-    subject = List(of_type=ID)
+    subject = List(of_type=ID, required=True)
 
     experience = String(required=True)
     service_type = List(of_type=String, required=True)
-    short_job = Boolean()
-    career_average = Float()
-    work_hour = Int()
-    informatic_tool = String()
-    # username = String(required=True)
-    # password = String(required=True)
-    # is_superuser = Boolean()
-    # is_staff = Boolean()
+    short_job = Boolean(required=True)
+    career_average = Float(required=True)
+    work_hour = Int(required=True)
+    informatic_tool = String(required=True)
 
 
 class UpdateMonitorInput(InputObjectType):

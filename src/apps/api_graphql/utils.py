@@ -24,12 +24,11 @@ def transform_global_ids_list(args):
     for value in args:
         # print(value)
         try:
-            
             new_value = from_global_id(value)[1]
             ids.append(new_value)
         except:
             raise InvalidIdException(
-                _("%s field contains invalid id"))
+                _("Subject field contains invalid id"))
     return ids
 
 

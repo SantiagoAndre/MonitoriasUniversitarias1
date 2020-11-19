@@ -38,9 +38,9 @@ class MonitorTest(TestCase):
                         college_career=self.career, last_name="TestName", telephone="31122323", service_type=None
                         )
             m.save()
-            self.assertTrue(True)
-        except:
             self.assertTrue(False)
+        except:
+            self.assertTrue(True)
 
     def test_experience_null(self):
         try:
@@ -50,9 +50,9 @@ class MonitorTest(TestCase):
                         college_career=self.career, last_name="TestName", telephone="31122323", service_type=None, experience=None
                         )
             m.save()
-            self.assertTrue(True)
-        except:
             self.assertTrue(False)
+        except:
+            self.assertTrue(True)
 
     def test_experience_blank(self):
         try:
@@ -60,12 +60,12 @@ class MonitorTest(TestCase):
                         first_name="juanito", college=self.college, email=self.email,
                         residence='self.name3', level_education=self.level_education,
                         college_career=self.career, last_name="TestName", telephone="31122323",
-                        service_type=None, experience=""
+                        service_type="None", experience=""
                         )
             m.save()
-            self.assertTrue(True)
-        except:
             self.assertTrue(False)
+        except:
+            self.assertTrue(True)
 
     def test_experience_specials_characters(self):
         try:
@@ -73,7 +73,7 @@ class MonitorTest(TestCase):
                         first_name="juanito", college=self.college, email=self.email,
                         residence='self.name3', level_education=self.level_education,
                         college_career=self.career, last_name="TestName", telephone="31122323",
-                        service_type=None, experience="None <&&&.,qw>"
+                        service_type="None", experience="None <&&&.,qw>"
                         )
             m.save()
             self.assertTrue(False)
@@ -86,7 +86,7 @@ class MonitorTest(TestCase):
                         first_name="juanito", college=self.college, email=self.email,
                         residence='self.name3', level_education=self.level_education,
                         college_career=self.career, last_name="TestName", telephone="31122323",
-                        service_type=None, short_job="None <&&&.,qw>"
+                        service_type="None", short_job="None <&&&.,qw>"
                         )
             m.save()
             self.assertTrue(False)
@@ -99,7 +99,7 @@ class MonitorTest(TestCase):
                         first_name="juanito", college=self.college, email=self.email,
                         residence='self.name3', level_education=self.level_education,
                         college_career=self.career, last_name="TestName", telephone="31122323",
-                        service_type=None, short_job=None
+                        service_type="None", short_job=True
                         )
             m.save()
             s = self.sub.save()

@@ -40,7 +40,7 @@ def send_email(sender, instance, **kwargs):
 
 @receiver(pre_save, sender=Monitor)
 def monitor_names(sender, instance, **kwargs):
-    validate_float(instance.career_average,_("Monitor: career average have to be float not string"))
+    validate_float(instance.career_average,_("Monitor: career average must to be float not string"))
 
 
 @receiver(pre_save, sender=Monitor)
@@ -66,8 +66,8 @@ def monitor_model_null_or_none(sender, instance, **kwargs):
     validate_blank_or_none(instance.first_name, (blank_or_none_message % _("first name") ))
     validate_blank_or_none(instance.last_name,(blank_or_none_message % _("last name") ))
     validate_blank_or_none(instance.email, (blank_or_none_message % _("email") ))
-    print(instance.service_type)
-    #validate_blank_or_none(instance.service_type,(blank_or_none_message % _("service type") ))
+    # print(instance.service_type)
+    validate_blank_or_none(instance.service_type,(blank_or_none_message % _("service type") ))
 
 
 @receiver(pre_save, sender=Monitor)
