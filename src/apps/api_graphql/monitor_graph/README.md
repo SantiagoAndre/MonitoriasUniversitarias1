@@ -226,6 +226,6 @@ query Search($subject_Name_Istartswith:String){
 #### Variables
 ```json
 {
-  "subject_Name_Istartswith": "ma"
+  "subject_Name_Istartswith": "matematicas"
 }
 ```
