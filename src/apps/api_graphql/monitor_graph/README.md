@@ -171,3 +171,59 @@ query {
   }
 }
 ```
+## Busqueda de monitor por linea de aprendizaje
+
+```graphql
+query M($subject_Name_Istartswith:String){
+  allMonitors(subject_Name_Istartswith:$subject_Name_Istartswith){
+    edges{
+      node{
+        email
+        firstName
+        lastName
+        subject(name_Istartswith:$subject_Name_Istartswith){
+          edges{
+            node{
+              name
+            }
+          }
+        }
+      }
+    }
+  }
+}
+```
+### Variables
+
+- subject_Name_Icontains: String
+- subject_Name_Icontains : String
+- subject_Name_Istartswith: String
+
+
+# ejemplo 
+```graphql
+query M($subject_Name_Istartswith:String){
+  allMonitors(subject_Name_Istartswith:$subject_Name_Istartswith){
+    edges{
+      node{
+        email
+        firstName
+        lastName
+        subject(name_Istartswith:$subject_Name_Istartswith){
+          edges{
+            node{
+              name
+            }
+          }
+        }
+      }
+    }
+  }
+}
+```
+#### Variables
+```json
+{
+  "subject_Name_Istartswith": "ma"
+}
+```
