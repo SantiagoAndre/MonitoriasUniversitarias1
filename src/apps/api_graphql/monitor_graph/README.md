@@ -174,7 +174,7 @@ query {
 ## Busqueda de monitor por linea de aprendizaje
 
 ```graphql
-query M($subject_Name_Istartswith:String){
+query Search($subject_Name_Istartswith:String){
   allMonitors(subject_Name_Istartswith:$subject_Name_Istartswith){
     edges{
       node{
@@ -194,15 +194,17 @@ query M($subject_Name_Istartswith:String){
 }
 ```
 ### Variables
-
-- subject_Name_Icontains: String
+- email: String
+- lastName: String
+- firstName: String
+- subject_Name: String
 - subject_Name_Icontains : String
 - subject_Name_Istartswith: String
 
 
 # ejemplo 
 ```graphql
-query M($subject_Name_Istartswith:String){
+query Search($subject_Name_Istartswith:String){
   allMonitors(subject_Name_Istartswith:$subject_Name_Istartswith){
     edges{
       node{
