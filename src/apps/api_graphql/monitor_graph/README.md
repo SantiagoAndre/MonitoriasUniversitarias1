@@ -229,3 +229,47 @@ query Search($subject_Name_Istartswith:String){
   "subject_Name_Istartswith": "matematicas"
 }
 ```
+
+
+### update estado
+
+```graphql
+mutation updateState($input:UpdateIsActiveInput!){
+  updateMonitorIsActive(input:$input){
+    monitor{
+      id
+      isActive
+    }
+  }
+}
+```
+
+### variable
+- id: ID
+- isActive: Boolean
+
+```json
+{
+ "input": {
+  "id": "TW9uaXRvck5vZGU6MTI5",
+  "isActive": "false"
+}
+}
+```
+
+# Query un solo monitor
+
+```graphql
+query monitor($id:ID!){
+  monitor(id:$id){
+    firstName
+    isActive
+  }
+}
+```
+
+```json
+{
+  "id":"TW9uaXRvck5vZGU6MQ=="
+}
+```

@@ -9,7 +9,7 @@ class MonitorNode(DjangoObjectType):
     class Meta:
         model = Monitor
         interfaces = (Node, )
-        exclude_fields = ('is_staff', 'is_superuser', 'last_login', 'is_active', 'date_joined',
+        exclude_fields = ('is_staff', 'is_superuser', 'last_login', 'date_joined',
                           'password', 'username')
         filter_fields = {
             'first_name': ['exact', 'icontains'],

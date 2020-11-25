@@ -24,3 +24,7 @@ class MonitorInput(InputObjectType):
 class UpdateMonitorInput(InputObjectType):
     id = ID(required=True)
     status = String(required=True)
+
+class UpdateIsActiveInput(InputObjectType):
+    id = ID(required=True)
+    is_active=Boolean(required=True)
