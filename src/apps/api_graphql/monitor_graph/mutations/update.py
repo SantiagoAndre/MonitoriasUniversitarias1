@@ -2,7 +2,7 @@ from graphene import Field, String, Mutation
 
 from apps.api_graphql.monitor_graph.inputs import UpdateMonitorInput, UpdateIsActiveInput
 from apps.api_graphql.monitor_graph.objects import MonitorNode
-from apps.monitor.models import Monitor
+from apps.registry_monitor.models import Monitor
 
 from apps.api_graphql.utils import transform_global_ids
 

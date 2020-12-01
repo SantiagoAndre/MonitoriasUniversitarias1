@@ -2,18 +2,18 @@
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader  import get_template
 from django.utils.translation import gettext_lazy as _
-from .models import Monitor
+from .models import RegistryMonitor
 from core import settings 
 INFO_EMAIL = {
-    Monitor.PRESELECTION:{
+    RegistryMonitor.PRESELECTION:{
         "subject": _("Successful Registration"),
         "template": "emails/registered.html",
     },
-    Monitor.TEST:{
+    RegistryMonitor.TEST:{
         "subject": _("Welcome to trial period"),
         "template": "emails/trial_period.html",
     },
-    Monitor.SELECTED:{
+    RegistryMonitor.SELECTED:{
         "subject": _("Welcome to the Monitorías Universitarias Team"),
         "template": "emails/selected.html",
     }

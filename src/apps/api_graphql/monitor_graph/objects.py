@@ -2,9 +2,9 @@ from graphene_django import DjangoObjectType
 from graphene import relay, Node
 
 from apps.api_graphql.connections import TotalCountConnection
-from apps.monitor.models import Monitor
+from apps.registry_monitor.models import Monitor
 
-
+# TODO quit model
 class MonitorNode(DjangoObjectType):
     class Meta:
         model = Monitor
@@ -15,6 +15,6 @@ class MonitorNode(DjangoObjectType):
             'first_name': ['exact', 'icontains'],
             'last_name': ['exact','icontains'],
             'email': ['exact'],
-            'subject__name': ['exact', 'icontains','istartswith'],
+            'subjects__name': ['exact', 'icontains','istartswith'],
         }
         connection_class = TotalCountConnection

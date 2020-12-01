@@ -43,8 +43,8 @@ INSTALLED_APPS = [
     'corsheaders',# cors
     'apps.learning_graph',
     'apps.api_graphql',
-
-    'apps.monitor',
+    'apps.registry_monitor',
+    'apps.users',
 ]
 
 MIDDLEWARE = [
@@ -68,7 +68,7 @@ ROOT_URLCONF = 'core.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS':  [os.path.join(BASE_DIR, 'core', 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -144,7 +144,7 @@ STATICFILES_STORAGE =(
 MAX_DEEP_SUBJECT = config("MAX_DEEP_SUBJECT",default=4,cast=int)
 
 
-
+AUTH_USER_MODEL = 'users.User'
 
 
 #  ------------Production and Deployment Config ------------------------
@@ -175,11 +175,8 @@ if config('PRODUCTION',default=False,cast=bool):
     EMAIL_USE_TLS = True
     EMAIL_PORT = config('EMAIL_PORT', default=587, cast=int)
     EMAIL_HOST_USER = config('EMAIL_USER')
-    EMAIL_HOST_PASSWORD = config('EMAIL_USER')
+    EMAIL_HOST_PASSWORD = config('EMAIL_PASSWORD')
     
     
 else:
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-    
-
-
